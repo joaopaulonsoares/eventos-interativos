@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 
 export const HeaderContainer = styled.header`
-    height: 4rem;
+    height: 7vh;
     border-bottom: 1px solid var(--gray-300);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,8 +18,10 @@ export const HeaderContainer = styled.header`
             line-height: 5rem;
             color: var(--gray-300);
             text-decoration: none;
+            text-transform: uppercase;
             transition: color 0.2s;
             font-weight: bold;
+            font-size: 1rem;
 
             // Todos depois do primeiro
             & + a {

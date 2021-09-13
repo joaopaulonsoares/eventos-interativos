@@ -1,20 +1,24 @@
 import React from 'react';
+import Image from 'next/image'
+import logoImg from '../../assets/images/logo.png';
 import { HeaderContainer } from './styles';
 import { LoginLogoutButton } from '../LoginLogoutButton';
 
 export function Header(){
-
+    const isHomePage = false;
     return (
         <HeaderContainer>
-                <img src="../../assets/images/logo.png" alt="ig.news logo" />
-                <nav>
+                <Image src={logoImg} alt="Logo" />
+
+                { !isHomePage && (
+                    <nav>
                         <a href="#">Página inicial</a>
-                        <a href="#">Audiência</a>
-                        <a href="#" className="active">Agenda</a>
-                </nav>
+                        <a href="#" className="active">Audiência</a>
+                        <a href="#">Agenda</a>
+                    </nav>
+                )}
 
                 <LoginLogoutButton />
-
         </HeaderContainer>
     )
 }
