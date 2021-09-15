@@ -1,7 +1,7 @@
 export const messageArrayMock = [
     {
         user: {
-            name: 'João',
+            name: 'João ADMIN',
             isAdmin: true,
         },
         message: 'Testeeeee',

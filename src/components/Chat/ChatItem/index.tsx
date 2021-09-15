@@ -3,7 +3,7 @@ import { ChatMessage } from './styles';
 
 interface UserInterface {
     name: string;
-    isAdmin: Boolean;
+    isAdmin: boolean;
 }
 
 interface MessageInterface {
@@ -15,9 +15,10 @@ interface MessageInterface {
 export const ChatItem: React.FC<MessageInterface> = ({user, message, timestamp}) => {
 
     return (
-        <ChatMessage>
+        <ChatMessage isAdmin={user.isAdmin}>
             <p>
-                <span className="userName">{user.name}: </span>
+                <span className="userName">{ user.isAdmin ? 'Administrador' : user.name }: </span>
+                
                 <span className="userMessage">{message}</span>
             </p>
             <p className="messageInfo">

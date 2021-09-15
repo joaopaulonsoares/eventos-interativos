@@ -7,7 +7,7 @@ export const ChatContainerDiv = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.7rem;
 
     .sectionTitle{
         font-size: 1.5rem;
@@ -23,8 +23,6 @@ export const ChatContainerDiv = styled.div`
         overflow: auto;
         // overflow-y: hidden;
 
-        ::-webkit-scrollbar{width: 6px}
-        ::-webkit-scrollbar-thumb{background-color: var(--gray-300);}
     }
 
     .chatInputArea {
