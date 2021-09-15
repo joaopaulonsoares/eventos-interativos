@@ -9,6 +9,7 @@ export const ChatMessage = styled.div`
   border-radius: 5px;
   margin: 5px 0;
   font-size: 1rem;
+  padding: 5px;
 
   p{
     padding: 5px;

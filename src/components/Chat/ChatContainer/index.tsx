@@ -16,6 +16,7 @@ export function ChatContainer(){
 
     return (
         <ChatContainerDiv>
+            <span className="sectionTitle">Chat</span>
             <div className="chatMessages">
                 {
                     messageArrayMock.map((item, index) => {

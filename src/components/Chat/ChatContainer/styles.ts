@@ -9,14 +9,22 @@ export const ChatContainerDiv = styled.div`
     justify-content: space-between;
     padding: 1rem;
 
+    .sectionTitle{
+        font-size: 1.5rem;
+        height: 5%;
+    }
+
     .chatMessages {
-        height: 80%;
+        height: 75%;
         width: 100%;
         display: flex;
         flex-direction: column;
         margin-bottom: 10px;
         overflow: auto;
         // overflow-y: hidden;
+
+        ::-webkit-scrollbar{width: 6px}
+        ::-webkit-scrollbar-thumb{background-color: var(--gray-300);}
     }
 
     .chatInputArea {
