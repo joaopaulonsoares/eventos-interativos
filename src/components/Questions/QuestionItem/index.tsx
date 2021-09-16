@@ -1,5 +1,10 @@
 import React from 'react';
-import { HiDotsVertical } from "react-icons/hi";
+import { Avatar} from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
+import { AiOutlineLike } from "react-icons/ai";
+
+import { Icon } from "@chakra-ui/react"
+
 import { QuestionBox } from './style';
 
 interface UserInterface {
@@ -25,14 +30,24 @@ export const QuestionItem: React.FC<QuestionInterface> = ({user, question, times
                 </p>
 
                 <div className="questionFooter">
-                    <div>Infos </div>
+                    <div className="userInfo">
+                        <div className="avatar"><Avatar size="sm" name="Dan Abrahmov" src="https://bit.ly/dan-abramov" /></div>
+                        <div>
+                            <p className="userName">João Paulo</p>
+                            <p className="questionInfo">11:09 16/08/2021</p>
+                        </div>
+                    </div>
                     
-                    <div>Like</div>
+                    <div className="vote">
+                        <IconButton
+                            aria-label="Votar na pergunta"
+                            icon={<Icon as={AiOutlineLike} />}
+                            title="Vote nesta pergunta" 
+                        />
+                    </div>
                 </div>
             </div>
-            <div className="options">
-                <HiDotsVertical />
-            </div>
+
         </QuestionBox>
     )
 }

@@ -12,7 +12,7 @@ export const questionsMock = [
         user: {
             name: 'João',
         },
-        question: 'Testeeeee 2',
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper dignissim sagittis. Morbi ultrices, elit sed imperdiet hendrerit, risus sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper dignissim sagittis. Morbi ultrices, elit sed imperdiet hendrerit, risus sem. ',
         timestamp: '11:08  11/10/2019',
         votes: 20,
         currentUserVoted: false,
@@ -20,11 +20,52 @@ export const questionsMock = [
 
     {
         user: {
-            name: 'Nunes',
+            name: 'Terça',
         },
         question: 'Testeeeee',
         timestamp: '11:08  11/10/2019',
         votes: 23,
         currentUserVoted: true,
+    },
+
+    {
+        user: {
+            name: 'Quinta',
+        },
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper dignissim sagittis. Morbi ultrices, elit sed imperdiet hendrerit, risus sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper dignissim sagittis. Morbi ultrices, elit sed imperdiet hendrerit, risus sem. ',
+        timestamp: '11:08  11/10/2019',
+        votes: 20,
+        currentUserVoted: false,
+    },
+
+    {
+        user: {
+            name: 'Paulo',
+        },
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper dignissim sagittis. Morbi ultrices, elit sed imperdiet hendrerit, risus sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper dignissim sagittis. Morbi ultrices, elit sed imperdiet hendrerit, risus sem. ',
+        timestamp: '11:08  11/10/2019',
+        votes: 20,
+        currentUserVoted: false,
+    },
+
+    {
+        user: {
+            name: 'Terça',
+        },
+        question: 'Testeeeee?',
+        timestamp: '11:08  11/10/2019',
+        votes: 23,
+        currentUserVoted: true,
+    },
+
+
+    {
+        user: {
+            name: 'Teste',
+        },
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper dignissim sagittis. Morbi ultrices, elit sed imperdiet hendrerit, risus sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper dignissim sagittis. Morbi ultrices, elit sed imperdiet hendrerit, risus sem. ',
+        timestamp: '11:08  11/10/2019',
+        votes: 20,
+        currentUserVoted: false,
     },
 ];

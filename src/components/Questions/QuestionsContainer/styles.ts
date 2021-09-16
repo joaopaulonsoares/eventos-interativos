@@ -41,6 +41,9 @@ export const ChatContainerDiv = styled.div`
             border-radius: 10px 0px;
             resize: none;
         }
+        textarea:focus{
+            outline: 1px solid var(--gray-400); 
+        }
 
         .actionArea {
             height: 20%;

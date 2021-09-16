@@ -55,9 +55,7 @@ const Room: NextPage = () => {
                   <p>Compartilhar evento</p>
                 </div>
                 <div className="shareIcons">
-                  <li><FaWhatsapp size="25px"/></li>
-                  <li><FaTwitter size="25px"/></li>
-                  <li><FaFacebook size="25px"/></li>
+   
                 </div>
 
               </div>

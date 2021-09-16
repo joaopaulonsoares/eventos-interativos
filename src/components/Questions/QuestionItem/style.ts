@@ -7,7 +7,7 @@ export const QuestionBox = styled.div`
   width: 100%;
   height: auto;
   border-radius: 5px;
-  margin: 5px 0;
+  margin: 10px 0;
   font-size: 1rem;
   padding: 5px;
   display: flex;
@@ -25,7 +25,7 @@ export const QuestionBox = styled.div`
   }
 
   .messageContent {
-    width: 95%;
+    width: 100%;
   }
 
   .userMessage {
@@ -37,6 +37,45 @@ export const QuestionBox = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 5px;
+
+    .userInfo {
+      display: flex;
+      align-items: center;
+      
+      .avatar {
+        padding-right: 0.2rem;
+      }
+
+      p {
+        padding: 0;
+        margin: 0;
+      }
+
+      .userName {
+        font-size: 0.9rem;
+      }
+
+      .questionInfo {
+        font-size: 0.7rem;
+        line-height: 0.7rem;
+      }
+    }
+
+    .vote {
+      display: flex;
+      flex-direction: row-reverse;
+
+      button {
+        color: var(--yellow);
+        background: none;
+
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+
   }
 `;
 
