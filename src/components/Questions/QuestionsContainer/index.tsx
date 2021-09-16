@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import { FaPaperPlane } from "react-icons/fa";
 import { ChatContainerDiv } from './styles';
-import { ChatItem } from '../ChatItem/index';
+import { QuestionItem } from '../QuestionItem/index';
+import { questionsMock } from './mock';
 
-import { messageArrayMock } from './mock';
 
-export function ChatContainer(){
+export function QuestionContainer(){
     const [userMessage, setUserMessage] = useState('');
 
     const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -14,28 +14,35 @@ export function ChatContainer(){
 
     return (
         <ChatContainerDiv>
-            <span className="sectionTitle">Chat</span>
-            <div className="chatMessages">
+            <span className="sectionTitle">Perguntas</span>
+            <div className="questionsArea">
                 {
-                    messageArrayMock.map((item, index) => {
-                        return <ChatItem key={index} user={item.user} timestamp={item.timestamp} message={item.message}/>
+                    questionsMock.map((question, index) => {
+                        return (<QuestionItem 
+                                    key={index}
+                                    user={question.user}
+                                    timestamp={question.timestamp}
+                                    question={question.question}
+                                    votes={question.votes}
+                                    currentUserVoted={question.currentUserVoted}
+                                />)
                     })
                 }
             </div>
-            <div className="chatInputArea">
+            <div className="questionInputArea">
                 <textarea 
                     id="messageInput" 
                     name="w3review" 
                     rows={4} 
                     cols={50} 
-                    placeholder="Escreva aqui a sua mensagem ..."
+                    placeholder="Escreva aqui a sua pergunta ..."
                     onChange={handleInputChange}
-                    maxLength={240}
+                    maxLength={400}
                 />
                 <div className="actionArea">
                     <div className="visualDiv"></div>
                     <div className="buttonDiv">
-                        <span>{userMessage.length}/240</span>
+                        <span>{userMessage.length}/400</span>
                         <button><FaPaperPlane color="white"  fontSize="1.2em"/></button>
                     </div>
                 </div>

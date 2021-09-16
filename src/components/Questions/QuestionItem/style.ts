@@ -1,13 +1,9 @@
 import styled from 'styled-components';
 
-interface ChatMessageProps {
-  isAdmin: boolean;
-}
 
-
-export const ChatMessage = styled.div<ChatMessageProps>`
+export const QuestionBox = styled.div`
   
-  background-color: ${props => props.isAdmin ? "var(--yellow)" : "var(--gray-200)"};
+  background-color: var(--gray-200);
   width: 100%;
   height: auto;
   border-radius: 5px;
@@ -32,26 +28,15 @@ export const ChatMessage = styled.div<ChatMessageProps>`
     width: 95%;
   }
 
-  .userName {
-    font-weight: bold;
-    padding-right: 0.1rem;
-  }
-
   .userMessage {
     font-weight: regular;
     color: var(--gray-600);
   }
 
-  .messageInfo {
-    font-size: 0.8rem;
-    color: var(--gray-400);
-    width: 100%;
+  .questionFooter {
     display: flex;
-    flex-direction: row-reverse;
-
-    span {
-      padding-right: 0.3rem;
-    }
+    justify-content: space-between;
+    padding: 5px;
   }
 `;
 

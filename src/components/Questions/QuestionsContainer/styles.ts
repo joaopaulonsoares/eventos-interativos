@@ -15,7 +15,7 @@ export const ChatContainerDiv = styled.div`
         height: 5%;
     }
 
-    .chatMessages {
+    .questionsArea {
         height: 75%;
         width: 100%;
         display: flex;
@@ -27,7 +27,7 @@ export const ChatContainerDiv = styled.div`
         ::-webkit-scrollbar-thumb{background-color: var(--gray-300); border-radius: 10px;}
     }
 
-    .chatInputArea {
+    .questionInputArea {
         height: 20%;
         width: 100%;
 

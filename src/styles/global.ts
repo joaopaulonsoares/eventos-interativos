@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        ::-webkit-scrollbar{width: 6px}
+        ::-webkit-scrollbar{width: 8px}
         ::-webkit-scrollbar-thumb{background-color: var(--gray-300); border-radius: 10px;}
     }
     // font-size default = 16px (good for desktops)
@@ -32,7 +32,6 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background: var(--background);
         -webkit-font-smoothing: antialiased;
-        
     }
     body, input, textarea, button {
         font-family: 'Poppins', sans-serif;

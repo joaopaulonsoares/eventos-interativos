@@ -5,6 +5,7 @@ import { FaArrowLeft, FaWhatsapp, FaTwitter, FaFacebook } from "react-icons/fa";
 import { VideoPlayer } from '../../components/VideoPlayer';
 import { Header } from '../../components/Header'
 import { ChatContainer } from '../../components/Chat/ChatContainer';
+import { QuestionContainer } from '../../components/Questions/QuestionsContainer/index';
 import { RoomContainer, QuestionsSection, VideoSection, ChatSection } from './style';
 
 const Room: NextPage = () => {
@@ -28,7 +29,7 @@ const Room: NextPage = () => {
             </div>
 
             <div className="sectionContentDiv">
-              oi
+              <QuestionContainer />
             </div>
           </QuestionsSection>
   

@@ -6,7 +6,7 @@ export function VideoPlayer(){
     return (
         <VideoContainer>
             <iframe 
-                src='https://www.youtube.com/embed/EvGOlAkLSLw'
+                src='https://www.youtube.com/embed/bZVgBAurxsI'
                 frameBorder='0'
                 allow='autoplay; encrypted-media'
                 allowFullScreen
