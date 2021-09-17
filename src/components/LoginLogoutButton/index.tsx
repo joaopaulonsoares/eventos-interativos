@@ -1,9 +1,9 @@
-import React from "react";
-import { Avatar } from "@chakra-ui/react";
-import { AiOutlineLogout } from "react-icons/ai";
-import { LoginButton, LogoutButton } from "./style";
+import React from 'react';
+import { Avatar } from '@chakra-ui/react';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { LoginButton, LogoutButton } from './style';
 
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from '../../hooks/useAuth';
 
 export function LoginLogoutButton() {
   const { signInWithGoogle, user } = useAuth();

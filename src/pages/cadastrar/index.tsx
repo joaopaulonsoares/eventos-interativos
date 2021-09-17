@@ -1,30 +1,30 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FormEvent, useState } from "react";
-import Head from "next/head";
-import type { NextPage } from "next";
-import { Header } from "../../components/Header";
-import { useAuth } from "../../hooks/useAuth";
-import { database } from "../../services/firebase";
+import React, { FormEvent, useState } from 'react';
+import Head from 'next/head';
+import type { NextPage } from 'next';
+import { Header } from '../../components/Header';
+import { useAuth } from '../../hooks/useAuth';
+import { database } from '../../services/firebase';
 
 const CreateEvent: NextPage = () => {
   const { user } = useAuth();
-  const [eventTitle, setEventTitle] = useState("");
-  const [eventVideo, setEventVideo] = useState("");
+  const [eventTitle, setEventTitle] = useState('');
+  const [eventVideo, setEventVideo] = useState('');
 
   async function handleCreateNewEvent(event: FormEvent) {
     event.preventDefault();
 
-    const roomRef = database.ref("events");
+    const roomRef = database.ref('events');
 
     await roomRef.push({
       title: eventTitle,
       youtube_id: eventVideo,
       event_author: user?.id,
-      event_day: "11/09/2021",
-      event_hour: "09:00",
-      event_type: "Audiência Pública",
-      event_description: "Uma descrição qualquer do evento e suas informações",
-      event_status: "Agendado",
+      event_day: '11/09/2021',
+      event_hour: '09:00',
+      event_type: 'Audiência Pública',
+      event_description: 'Uma descrição qualquer do evento e suas informações',
+      event_status: 'Agendado',
     });
   }
 

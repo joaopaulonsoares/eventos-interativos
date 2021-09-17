@@ -1,8 +1,8 @@
-import React from "react";
-import { Avatar, IconButton, Icon } from "@chakra-ui/react";
-import { AiOutlineLike } from "react-icons/ai";
+import React from 'react';
+import { Avatar, IconButton, Icon } from '@chakra-ui/react';
+import { AiOutlineLike } from 'react-icons/ai';
 
-import { QuestionBox } from "./style";
+import { QuestionBox } from './style';
 
 interface UserInterface {
   name: string;
@@ -15,7 +15,7 @@ interface QuestionInterface {
   timestamp?: string;
 }
 
-export const QuestionItem: React.FC<QuestionInterface> = ({ user, question, timestamp = "-" }) => (
+export const QuestionItem: React.FC<QuestionInterface> = ({ user, question, timestamp = '-' }) => (
   <QuestionBox>
     <div className="messageContent">
       <p>

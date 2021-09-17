@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
-import React from "react";
-import { VideoContainer } from "./style";
+import React from 'react';
+import { VideoContainer } from './style';
 
 export function VideoPlayer() {
   return (

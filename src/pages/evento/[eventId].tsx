@@ -1,23 +1,23 @@
-import React from "react";
-import type { NextPage } from "next";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { FaArrowLeft } from "react-icons/fa";
-import { VideoPlayer } from "../../components/VideoPlayer";
-import { Header } from "../../components/Header";
-import { ChatContainer } from "../../components/Chat/ChatContainer";
-import { QuestionContainer } from "../../components/Questions/QuestionsContainer/index";
+import React from 'react';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { FaArrowLeft } from 'react-icons/fa';
+import { VideoPlayer } from '../../components/VideoPlayer';
+import { Header } from '../../components/Header';
+import { ChatContainer } from '../../components/Chat/ChatContainer';
+import { QuestionContainer } from '../../components/Questions/QuestionsContainer/index';
 import {
   RoomContainer,
   QuestionsSection,
   VideoSection,
   ChatSection,
-} from "../../styles/pages/eventoPageStyle";
+} from '../../styles/pages/eventoPageStyle';
 
 const Room: NextPage = () => {
   const router = useRouter();
   const { eventId } = router.query;
-  const evId = eventId ? eventId.toString() : "erro";
+  const evId = eventId ? eventId.toString() : 'erro';
   // const [eventInfo, setEventInfo] = useState({});
 
   return (

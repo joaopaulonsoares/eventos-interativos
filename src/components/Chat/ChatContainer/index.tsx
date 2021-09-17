@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { FaPaperPlane } from "react-icons/fa";
-import { ChatContainerDiv } from "./styles";
-import { ChatItem } from "../ChatItem/index";
+import React, { useState } from 'react';
+import { FaPaperPlane } from 'react-icons/fa';
+import { ChatContainerDiv } from './styles';
+import { ChatItem } from '../ChatItem/index';
 
-import { messageArrayMock } from "./mock";
+import { messageArrayMock } from './mock';
 
 export function ChatContainer() {
-  const [userMessage, setUserMessage] = useState("");
+  const [userMessage, setUserMessage] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUserMessage(event.currentTarget.value);

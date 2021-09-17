@@ -1,13 +1,13 @@
-import React, { FormEvent, useEffect, useState } from "react";
-import { FaPaperPlane } from "react-icons/fa";
-import Skeleton from "react-loading-skeleton";
-import ScrollableFeed from "react-scrollable-feed";
-import toast from "react-hot-toast";
-import { ChatContainerDiv } from "./styles";
-import { QuestionItem } from "../QuestionItem/index";
+import React, { FormEvent, useEffect, useState } from 'react';
+import { FaPaperPlane } from 'react-icons/fa';
+import Skeleton from 'react-loading-skeleton';
+import ScrollableFeed from 'react-scrollable-feed';
+import toast from 'react-hot-toast';
+import { ChatContainerDiv } from './styles';
+import { QuestionItem } from '../QuestionItem/index';
 
-import { useAuth } from "../../../hooks/useAuth";
-import { database } from "../../../services/firebase";
+import { useAuth } from '../../../hooks/useAuth';
+import { database } from '../../../services/firebase';
 
 interface QuestionContainerProps {
   eventId: string;
@@ -36,7 +36,7 @@ type QuestionType = {
 };
 
 export function QuestionContainer({ eventId }: QuestionContainerProps) {
-  const [newUserQuestion, setNewUserQuestion] = useState("");
+  const [newUserQuestion, setNewUserQuestion] = useState('');
   const { user } = useAuth();
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [fetchingQuestions, setFetchingQuestions] = useState(true);
@@ -44,7 +44,7 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
   useEffect(() => {
     const roomRef = database.ref(`events/${eventId}/questions`);
 
-    roomRef.on("value", (events) => {
+    roomRef.on('value', (events) => {
       const databaseEvents = events.val();
       const firebaseQuestions: FirebaseQuestionsType = databaseEvents ?? {};
       const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => ({
@@ -64,12 +64,12 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
-    if (newUserQuestion.trim() === "") {
+    if (newUserQuestion.trim() === '') {
       return;
     }
 
     if (!user) {
-      toast.error("O usuário não está logado!", { position: "top-center" });
+      toast.error('O usuário não está logado!', { position: 'top-center' });
     }
 
     const question = {
@@ -78,21 +78,25 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
         name: user?.name,
         avatar: user?.avatar,
       },
-      timestamp: "10/10/10",
+      timestamp: '10/10/10',
     };
 
     try {
       await database.ref(`events/${eventId}/questions`).push(question);
-      toast.success("Pergunta enviada com sucesso!", { position: "bottom-left" });
-      setNewUserQuestion("");
+      toast.success('Pergunta enviada com sucesso!', { position: 'bottom-left' });
+      setNewUserQuestion('');
     } catch (e) {
-      toast.error("Erro ao enviar pergunta. Tente novamente!");
+      toast.error('Erro ao enviar pergunta. Tente novamente!');
     }
   }
 
   return (
     <ChatContainerDiv>
-      <span className="sectionTitle">Perguntas ({eventId})</span>
+      <span className="sectionTitle">
+        Perguntas (
+        {eventId}
+        )
+      </span>
       <div className="questionsArea">
         {!fetchingQuestions ? (
           <ScrollableFeed className="questionsFeed">

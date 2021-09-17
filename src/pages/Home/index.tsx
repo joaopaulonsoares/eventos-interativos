@@ -1,10 +1,10 @@
-import React from "react";
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import { Container } from "../../styles/pages/homePageStyle";
-import { Header } from "../../components/Header";
-import logoImg from "../../assets/images/logo_banner.png";
+import React from 'react';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import { Container } from '../../styles/pages/homePageStyle';
+import { Header } from '../../components/Header';
+import logoImg from '../../assets/images/logo_banner.png';
 
 const Home: NextPage = () => (
   <div>

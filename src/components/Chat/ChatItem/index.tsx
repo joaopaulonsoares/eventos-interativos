@@ -1,6 +1,6 @@
-import React from "react";
-import { HiDotsVertical } from "react-icons/hi";
-import { ChatMessage } from "./styles";
+import React from 'react';
+import { HiDotsVertical } from 'react-icons/hi';
+import { ChatMessage } from './styles';
 
 interface UserInterface {
   name: string;
@@ -17,7 +17,11 @@ export const ChatItem: React.FC<MessageInterface> = ({ user, message, timestamp 
   <ChatMessage isAdmin={user.isAdmin}>
     <div className="messageContent">
       <p>
-        <span className="userName">{user.isAdmin ? "Administrador" : user.name}: </span>
+        <span className="userName">
+          {user.isAdmin ? 'Administrador' : user.name}
+          :
+          {' '}
+        </span>
 
         <span className="userMessage">{message}</span>
       </p>

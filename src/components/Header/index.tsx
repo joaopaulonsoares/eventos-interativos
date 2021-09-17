@@ -1,8 +1,8 @@
-import React from "react";
-import Image from "next/image";
-import logoImg from "../../assets/images/logo.png";
-import { HeaderContainer } from "./styles";
-import { LoginLogoutButton } from "../LoginLogoutButton";
+import React from 'react';
+import Image from 'next/image';
+import logoImg from '../../assets/images/logo.png';
+import { HeaderContainer } from './styles';
+import { LoginLogoutButton } from '../LoginLogoutButton';
 
 export function Header() {
   const isHomePage = false;
