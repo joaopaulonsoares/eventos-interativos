@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FaArrowLeft, FaWhatsapp, FaTwitter, FaFacebook } from "react-icons/fa";
 
@@ -14,6 +15,9 @@ const Room: NextPage = () => {
 
   return (
     <div>
+        <Head>
+          <title>Importância do cuidador das alguma coisa</title>
+        </Head>
         <Header />
 
         <RoomContainer>

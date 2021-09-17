@@ -16,6 +16,11 @@ export const LoginButton = styled.button`
     color: var(--white);
     font-weight: bold;
     font-size: 1rem;
+
+    transition: 0.2s;
+    &:hover {
+        filter: brightness(0.9);
+    }
 `;
 
 export const LogoutButton = styled.button`

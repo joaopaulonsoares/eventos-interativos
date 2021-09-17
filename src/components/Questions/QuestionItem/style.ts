@@ -11,6 +11,7 @@ export const QuestionBox = styled.div`
   font-size: 1rem;
   padding: 5px;
   display: flex;
+  
 
   p{
     padding: 5px;
