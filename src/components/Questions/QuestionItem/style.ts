@@ -1,8 +1,6 @@
-import styled from 'styled-components';
-
+import styled from "styled-components";
 
 export const QuestionBox = styled.div`
-  
   background-color: var(--gray-200);
   width: 100%;
   height: auto;
@@ -11,9 +9,8 @@ export const QuestionBox = styled.div`
   font-size: 1rem;
   padding: 5px;
   display: flex;
-  
 
-  p{
+  p {
     padding: 5px;
     line-height: 1.3rem;
   }
@@ -42,7 +39,7 @@ export const QuestionBox = styled.div`
     .userInfo {
       display: flex;
       align-items: center;
-      
+
       .avatar {
         padding-right: 0.2rem;
       }
@@ -76,7 +73,5 @@ export const QuestionBox = styled.div`
         }
       }
     }
-
   }
 `;
-

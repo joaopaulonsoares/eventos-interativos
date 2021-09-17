@@ -1,37 +1,34 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { FormEvent, useState } from 'react';
-import logoImg from '../../assets/images/logo_banner.png';
-import { Header } from '../../components/Header'
-import { useAuth } from '../../hooks/useAuth';
-import { database } from '../../services/firebase';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { FormEvent, useState } from "react";
+import Head from "next/head";
+import type { NextPage } from "next";
+import { Header } from "../../components/Header";
+import { useAuth } from "../../hooks/useAuth";
+import { database } from "../../services/firebase";
 
 const CreateEvent: NextPage = () => {
   const { user } = useAuth();
-   const [eventTitle, setEventTitle] = useState('');
-   const [eventVideo, setEventVideo] = useState('');
+  const [eventTitle, setEventTitle] = useState("");
+  const [eventVideo, setEventVideo] = useState("");
 
+  async function handleCreateNewEvent(event: FormEvent) {
+    event.preventDefault();
 
-   async function handleCreateNewEvent(event: FormEvent){
-     console.log('chamou')
-     event.preventDefault();
+    const roomRef = database.ref("events");
 
-     const roomRef = database.ref('events');
+    await roomRef.push({
+      title: eventTitle,
+      youtube_id: eventVideo,
+      event_author: user?.id,
+      event_day: "11/09/2021",
+      event_hour: "09:00",
+      event_type: "Audiência Pública",
+      event_description: "Uma descrição qualquer do evento e suas informações",
+      event_status: "Agendado",
+    });
+  }
 
-     const firebaseEvent = await roomRef.push({
-       title: eventTitle,
-       youtube_id: eventVideo,
-       event_author: user?.id,
-       event_day: '11/09/2021',
-       event_hour: '09:00',
-       event_type: 'Audiência Pública',
-       event_description: 'Uma descrição qualquer do evento e suas informações',
-       event_status: 'Agendado',
-     })
-   }
-
-   const handleEventTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEventTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEventTitle(e.currentTarget.value);
   };
 
@@ -54,14 +51,15 @@ const CreateEvent: NextPage = () => {
           <label htmlFor="name">Título</label>
           <input id="titulo" type="text" required onChange={handleEventTitleChange} />
           <label htmlFor="name">Video do Youtube</label>
-          <input id="youtubeVideo" type="text" required onChange={handleEventVideoChange}/>
+          <input id="youtubeVideo" type="text" required onChange={handleEventVideoChange} />
 
-          <button onClick={handleCreateNewEvent}>Cadastrar</button>
+          <button type="button" onClick={handleCreateNewEvent}>
+            Cadastrar
+          </button>
         </div>
       </main>
-
     </div>
-  )
-}
+  );
+};
 
-export default CreateEvent
+export default CreateEvent;

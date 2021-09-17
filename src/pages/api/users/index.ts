@@ -1,13 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default (request: NextApiRequest, response: NextApiResponse) => {
-    console.log(request.query);
+  const users = [
+    { id: 1, name: "Diego" },
+    { id: 2, name: "Teste" },
+  ];
 
-    const users = [
-        {id: 1, name: 'Diego'},
-        {id: 2, name: 'Teste'},
-    ];
-
-    return response.json(users);
-}
+  return response.json(users);
+};

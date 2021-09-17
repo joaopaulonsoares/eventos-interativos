@@ -1,13 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface ChatMessageProps {
   isAdmin: boolean;
 }
 
-
 export const ChatMessage = styled.div<ChatMessageProps>`
-  
-  background-color: ${props => props.isAdmin ? "var(--yellow)" : "var(--gray-200)"};
+  background-color: ${(props) => (props.isAdmin ? "var(--yellow)" : "var(--gray-200)")};
   width: 100%;
   height: auto;
   border-radius: 5px;
@@ -16,7 +14,7 @@ export const ChatMessage = styled.div<ChatMessageProps>`
   padding: 5px;
   display: flex;
 
-  p{
+  p {
     padding: 5px;
     line-height: 1.3rem;
   }
@@ -54,4 +52,3 @@ export const ChatMessage = styled.div<ChatMessageProps>`
     }
   }
 `;
-

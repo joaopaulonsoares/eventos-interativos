@@ -1,10 +1,7 @@
-import type { NextPage } from 'next'
-import Home from './Home/index';
+/* eslint-disable react/react-in-jsx-scope */
+import type { NextPage } from "next";
+import Home from "./Home/index";
 
-const Index: NextPage = () => {
-  return (
-    <Home />
-  )
-}
+const Index: NextPage = () => <Home />;
 
-export default Index
+export default Index;
