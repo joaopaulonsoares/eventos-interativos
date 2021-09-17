@@ -11,7 +11,7 @@ import { RoomContainer, QuestionsSection, VideoSection, ChatSection } from './st
 
 const Room: NextPage = () => {
     const router = useRouter()
-    const { roomId } = router.query;
+    const { eventId } = router.query;
 
   return (
     <div>
