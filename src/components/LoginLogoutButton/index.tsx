@@ -1,29 +1,20 @@
 import React from 'react';
-import { useRouter } from 'next/router'
+import { Avatar} from "@chakra-ui/react";
 import { LoginButton, LogoutButton } from './style';
 import { AiOutlineLogout } from "react-icons/ai";
 import { FaGoogle } from "react-icons/fa";
-import { auth, firebase } from '../../services/firebase';
+
+import { useAuth } from '../../hooks/useAuth';
+
 
 export function LoginLogoutButton(){
-    const isUserLoggedIn = false;
-    const router = useRouter()
-
-
-    async function signInWithGoogle() {
-        console.log('chamou')
-        const provider = new firebase.auth.GoogleAuthProvider();
-
-        auth.signInWithPopup(provider).then(result => {
-            console.log(result);
-        });
-        //router.push('/room/1');
-    }
+    const { signInWithGoogle , user} = useAuth();
+    const isUserLoggedIn = user;
 
     return isUserLoggedIn ? (
         <LogoutButton type="button">
-            <FaGoogle />
-                Username
+            <Avatar size="xs" name="Dan Abrahmov" src={user.avatar} />
+                {(user.name)}
             <AiOutlineLogout />
         </LogoutButton>
     ): (
