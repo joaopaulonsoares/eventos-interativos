@@ -1,6 +1,6 @@
 export const messageArrayMock = [
   {
-    id: '1',
+    id: 'sdadas2',
     user: {
       name: 'João ADMIN',
       isAdmin: true,
@@ -9,7 +9,7 @@ export const messageArrayMock = [
     timestamp: '11:08  11/10/2019',
   },
   {
-    id: '2',
+    id: 'dasd23',
     user: {
       name: 'Paulo',
       isAdmin: false,
@@ -18,7 +18,7 @@ export const messageArrayMock = [
     timestamp: '11:08  11/10/2019',
   },
   {
-    id: '3',
+    id: '234234fdsdas',
     user: {
       name: 'Nunes',
       isAdmin: false,
@@ -27,7 +27,7 @@ export const messageArrayMock = [
     timestamp: '11:08  11/10/2019',
   },
   {
-    id: '4',
+    id: 'dsadasdw212',
     user: {
       name: 'Nunes',
       isAdmin: false,
@@ -38,7 +38,7 @@ export const messageArrayMock = [
   },
 
   {
-    id: '5',
+    id: 'dassadas2134',
     user: {
       name: 'João',
       isAdmin: true,
@@ -48,7 +48,7 @@ export const messageArrayMock = [
   },
   {
     user: {
-      id: '6',
+      id: 'jgjhjl89',
       name: 'Paulo',
       isAdmin: false,
     },
@@ -57,7 +57,7 @@ export const messageArrayMock = [
   },
   {
     user: {
-      id: '7',
+      id: 'vcnvbn45',
       name: 'Nunes',
       isAdmin: false,
     },
@@ -66,7 +66,7 @@ export const messageArrayMock = [
   },
   {
     user: {
-      id: '8',
+      id: 'fsdfdsf4',
       name: 'Nunes',
       isAdmin: false,
     },
@@ -75,7 +75,7 @@ export const messageArrayMock = [
   },
 
   {
-    id: '9',
+    id: 'gfdgh7',
     user: {
       name: 'Nunes',
       isAdmin: false,
