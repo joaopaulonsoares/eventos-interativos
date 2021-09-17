@@ -9,18 +9,17 @@ import { QuestionBox } from './style';
 
 interface UserInterface {
     name: string;
+    avatar?: string | undefined;
 }
 
 interface QuestionInterface {
     user: UserInterface;
     question: string;
     timestamp?: string;
-    votes: number;
-    currentUserVoted: boolean;
 };
 
 
-export const QuestionItem: React.FC<QuestionInterface> = ({user, question, timestamp, votes, currentUserVoted}) => {
+export const QuestionItem: React.FC<QuestionInterface> = ({user, question, timestamp}) => {
 
     return (
         <QuestionBox>
@@ -31,9 +30,9 @@ export const QuestionItem: React.FC<QuestionInterface> = ({user, question, times
 
                 <div className="questionFooter">
                     <div className="userInfo">
-                        <div className="avatar"><Avatar size="sm" name="Dan Abrahmov" src="https://bit.ly/dan-abramov" /></div>
+                        <div className="avatar"><Avatar size="sm" name="Dan Abrahmov" src={user.avatar} /></div>
                         <div>
-                            <p className="userName">João Paulo</p>
+                            <p className="userName">{user.name}</p>
                             <p className="questionInfo">11:09 16/08/2021</p>
                         </div>
                     </div>

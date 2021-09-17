@@ -25,6 +25,10 @@ export const ChatContainerDiv = styled.div`
         // overflow-y: hidden;
         ::-webkit-scrollbar{width: 5px}
         ::-webkit-scrollbar-thumb{background-color: var(--gray-300); border-radius: 10px;}
+
+        .questionsFeed {
+            height: 100%;
+        }
     }
 
     .questionInputArea {

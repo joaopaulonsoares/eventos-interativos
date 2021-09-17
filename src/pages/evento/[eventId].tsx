@@ -8,10 +8,14 @@ import { Header } from '../../components/Header'
 import { ChatContainer } from '../../components/Chat/ChatContainer';
 import { QuestionContainer } from '../../components/Questions/QuestionsContainer/index';
 import { RoomContainer, QuestionsSection, VideoSection, ChatSection } from './style';
+import { useEffect, useState } from 'react';
 
 const Room: NextPage = () => {
     const router = useRouter()
     const { eventId } = router.query;
+    const evId = eventId ? eventId.toString() : 'erro';
+    const [eventInfo, setEventInfo] = useState({});
+
 
   return (
     <div>
@@ -33,7 +37,7 @@ const Room: NextPage = () => {
             </div>
 
             <div className="sectionContentDiv">
-              <QuestionContainer />
+              <QuestionContainer eventId={evId} />
             </div>
           </QuestionsSection>
   
