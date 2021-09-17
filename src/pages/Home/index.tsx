@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import logoImg from '../../assets/images/logo_banner.png';
-import { Container } from './style';
+import { Container } from '../../styles/pages/homePageStyle';
 import { Header } from '../../components/Header'
 
 const Home: NextPage = () => {

@@ -7,7 +7,7 @@ import { VideoPlayer } from '../../components/VideoPlayer';
 import { Header } from '../../components/Header'
 import { ChatContainer } from '../../components/Chat/ChatContainer';
 import { QuestionContainer } from '../../components/Questions/QuestionsContainer/index';
-import { RoomContainer, QuestionsSection, VideoSection, ChatSection } from './style';
+import { RoomContainer, QuestionsSection, VideoSection, ChatSection } from '../../styles/pages/eventoPageStyle';
 import { useEffect, useState } from 'react';
 
 const Room: NextPage = () => {
