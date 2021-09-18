@@ -1,4 +1,5 @@
 import React, { FormEvent, useEffect, useState } from 'react';
+import { format } from 'date-fns';
 import { FaPaperPlane } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import ScrollableFeed from 'react-scrollable-feed';
@@ -21,7 +22,7 @@ type FirebaseQuestionsType = Record<
       avatar: string;
     };
     question: string;
-    timestamp: string;
+    timestamp: Date;
   }
 >;
 
@@ -51,7 +52,7 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
         id: key,
         question: value.question,
         user: value.user,
-        timestamp: value.timestamp,
+        timestamp: (`${format(new Date(value.timestamp), 'dd/MM/yyyy, HH:mm')}`),
       }));
       setQuestions(parsedQuestions);
       setFetchingQuestions(false);
@@ -78,7 +79,7 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
         name: user?.name,
         avatar: user?.avatar,
       },
-      timestamp: '10/10/10',
+      timestamp: Date.now(),
     };
 
     try {
