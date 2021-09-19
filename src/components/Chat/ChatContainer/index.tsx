@@ -1,11 +1,13 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { FormEvent, useEffect, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { FaPaperPlane } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import ScrollableFeed from 'react-scrollable-feed';
 import Skeleton from 'react-loading-skeleton';
 import { ChatContainerDiv } from './styles';
 import { ChatItem } from '../ChatItem/index';
+import { TextAreaOfQuestionChat } from '../../TextAreaOfQuestionChat/index';
+
 import { useAuth } from '../../../hooks/useAuth';
 import { database } from '../../../services/firebase';
 import { useRoom } from '../../../hooks/useRoom';
@@ -62,8 +64,6 @@ export function ChatContainer({ eventId, eventStatus }: ChatContainerProps) {
     setShowChat(!showChat);
   };
 
-  console.log(eventStatus);
-
   return (
     <ChatContainerDiv>
       <div className="sectionHeader">
@@ -107,29 +107,15 @@ export function ChatContainer({ eventId, eventStatus }: ChatContainerProps) {
       <div className="chatInputArea">
         {
           (status === 'Em andamento' || status === 'Agendado') ? (
-            <>
-              <textarea
-                id="messageInput"
-                name="messageInputTextArea"
-                rows={4}
-                placeholder="Escreva aqui a sua mensagem ..."
-                onChange={handleInputChange}
-                maxLength={240}
-                value={userMessage}
-              />
-              <div className="actionArea">
-                <div className="visualDiv" />
-                <div className="buttonDiv">
-                  <span>
-                    {userMessage.length}
-                    /240
-                  </span>
-                  <button aria-label="Enviar mensagem no chat" type="button" onClick={handleSendChat} disabled={!user}>
-                    <FaPaperPlane color="white" fontSize="1.2em" />
-                  </button>
-                </div>
-              </div>
-            </>
+            <TextAreaOfQuestionChat
+              id="chatTextAreInput"
+              placeHolder="Escreva aqui a sua mensagem ..."
+              maxCharacters={240}
+              fieldValue={userMessage}
+              handleSendFunction={handleSendChat}
+              handleInputChange={handleInputChange}
+              disabled={!user}
+            />
           ) : (
             <div className="eventFinishedMessage">
               Evento encerrado para participações.
