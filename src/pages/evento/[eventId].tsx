@@ -42,7 +42,7 @@ const Room: NextPage = () => {
           </div>
 
           <div className="sectionContentDiv">
-            <QuestionContainer eventId={evId} />
+            <QuestionContainer eventId={evId} eventStatus={roomInfo ? roomInfo.status : 'Loading'} />
           </div>
         </QuestionsSection>
 

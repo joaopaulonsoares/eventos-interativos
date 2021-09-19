@@ -114,7 +114,7 @@ export function ChatContainer({ eventId, eventStatus }: ChatContainerProps) {
               fieldValue={userMessage}
               handleSendFunction={handleSendChat}
               handleInputChange={handleInputChange}
-              disabled={!user}
+              userIsNotLoggedIn={!user}
             />
           ) : (
             <div className="eventFinishedMessage">
@@ -122,7 +122,6 @@ export function ChatContainer({ eventId, eventStatus }: ChatContainerProps) {
             </div>
           )
         }
-
       </div>
     </ChatContainerDiv>
   );

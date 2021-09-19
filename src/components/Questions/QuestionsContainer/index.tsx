@@ -1,6 +1,6 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-unused-vars */
 import React, { FormEvent, useEffect, useState } from 'react';
-import { FaPaperPlane } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import ScrollableFeed from 'react-scrollable-feed';
 import toast from 'react-hot-toast';
@@ -10,15 +10,22 @@ import { QuestionItem } from '../QuestionItem/index';
 import { useAuth } from '../../../hooks/useAuth';
 import { database } from '../../../services/firebase';
 import { useRoom } from '../../../hooks/useRoom';
+import { TextAreaOfQuestionChat } from '../../TextAreaOfQuestionChat';
 
 interface QuestionContainerProps {
   eventId: string;
+  eventStatus: string;
 }
 
-export function QuestionContainer({ eventId }: QuestionContainerProps) {
+export function QuestionContainer({ eventId, eventStatus }: QuestionContainerProps) {
   const { user } = useAuth();
   const [newUserQuestion, setNewUserQuestion] = useState('');
   const { questions } = useRoom(eventId);
+  const [status, setStatus] = useState(eventStatus);
+
+  useEffect(() => {
+    setStatus(eventStatus);
+  }, [eventStatus]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewUserQuestion(event.currentTarget.value);
@@ -78,34 +85,23 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
         )}
       </div>
       <div className="questionInputArea">
-        {user ? (
-          <>
-            <textarea
-              id="messageInput"
-              name="w3review"
-              rows={4}
-              cols={50}
-              placeholder="Escreva aqui a sua pergunta ..."
-              onChange={handleInputChange}
-              maxLength={400}
-              value={newUserQuestion}
+        {
+          (status === 'Em andamento' || status === 'Agendado') ? (
+            <TextAreaOfQuestionChat
+              id="questionTextAreInput"
+              placeHolder="Escreva aqui a sua pergunta ..."
+              maxCharacters={400}
+              fieldValue={newUserQuestion}
+              handleSendFunction={handleSendQuestion}
+              handleInputChange={handleInputChange}
+              userIsNotLoggedIn={!user}
             />
-            <div className="actionArea">
-              <div className="visualDiv" />
-              <div className="buttonDiv">
-                <span>
-                  {newUserQuestion.length}
-                  /400
-                </span>
-                <button type="button" onClick={handleSendQuestion} disabled={!user}>
-                  <FaPaperPlane color="white" fontSize="1.2rem" />
-                </button>
-              </div>
+          ) : (
+            <div className="eventFinishedMessage">
+              Evento encerrado para participações.
             </div>
-          </>
-        ) : (
-          <div>Faça Login para enviar uma pergunta.</div>
-        )}
+          )
+        }
       </div>
     </ChatContainerDiv>
   );
