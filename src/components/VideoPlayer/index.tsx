@@ -2,11 +2,15 @@
 import React from 'react';
 import { VideoContainer } from './style';
 
-export function VideoPlayer() {
+interface VideoPlayerProps {
+  videoId: string;
+}
+
+export function VideoPlayer({ videoId }: VideoPlayerProps) {
   return (
     <VideoContainer>
       <iframe
-        src="https://www.youtube.com/embed/bZVgBAurxsI"
+        src={`https://www.youtube.com/embed/${videoId}`}
         frameBorder="0"
         allow="autoplay; encrypted-media"
         allowFullScreen

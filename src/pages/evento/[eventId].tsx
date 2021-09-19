@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FaArrowLeft } from 'react-icons/fa';
+import Skeleton from 'react-loading-skeleton';
 import { VideoPlayer } from '../../components/VideoPlayer';
 import { Header } from '../../components/Header';
 import { ChatContainer } from '../../components/Chat/ChatContainer';
@@ -13,17 +14,18 @@ import {
   VideoSection,
   ChatSection,
 } from '../../styles/pages/eventoPageStyle';
+import { useRoom } from '../../hooks/useRoom';
 
 const Room: NextPage = () => {
   const router = useRouter();
   const { eventId } = router.query;
   const evId = eventId ? eventId.toString() : 'erro';
-  // const [eventInfo, setEventInfo] = useState({});
+  const { roomInfo } = useRoom(evId);
 
   return (
     <div>
       <Head>
-        <title>Importância do cuidador das alguma coisa</title>
+        <title>Teste</title>
       </Head>
       <Header />
 
@@ -45,17 +47,46 @@ const Room: NextPage = () => {
 
         <VideoSection>
           <div className="sectionHeadDiv">
-            <div className="sectionTitleInformation">Importância do cuidador das alguma coisa</div>
+            <div className="sectionTitleInformation">
+              {
+                roomInfo?.title ? (
+                  <span>{roomInfo.title}</span>
+                ) : (
+                  <Skeleton height="20%" width="100%" />
+                )
+              }
+
+            </div>
             <div className="sectionSubTitleInformation">
-              Audiência Pública - 13 de Setembro de 2021 às 09:00
+              {
+                roomInfo?.parsedScheduleDate ? (
+                  <span>{`${roomInfo.type} - ${roomInfo.parsedScheduleDate}`}</span>
+                ) : (
+                  <Skeleton height="20%" width="40%" />
+                )
+              }
             </div>
           </div>
 
           <div className="videoPlayer">
-            <VideoPlayer />
+            {
+              roomInfo?.youtubeLiveVideoId ? (
+                <VideoPlayer videoId={roomInfo.youtubeLiveVideoId} />
+              ) : (
+                <Skeleton height="100%" width="100%" />
+              )
+            }
           </div>
 
-          <div className="eventInformation">oi</div>
+          <div className="eventInformation">
+            {
+              roomInfo?.description ? (
+                <span>{roomInfo.description}</span>
+              ) : (
+                <Skeleton height="100%" width="100%" />
+              )
+            }
+          </div>
         </VideoSection>
 
         <ChatSection>

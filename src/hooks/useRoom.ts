@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import { useEffect, useState } from 'react';
 import { database } from '../services/firebase';
 import { useAuth } from './useAuth';
@@ -31,7 +32,7 @@ type FirebaseRoomInfoType = {
   title: string;
   authorID: string;
   youtubeLiveVideoId: string;
-  scheduleDate: Date;
+  scheduleDate: string;
   type: string;
   description: string;
   status: 'Agendado' | 'Em andamento' | 'Encerrado' | 'Cancelado';
@@ -64,7 +65,8 @@ type RoomInfoType = {
   title: string;
   authorID: string;
   youtubeLiveVideoId: string;
-  scheduleDate: string;
+  scheduleDate: Date;
+  parsedScheduleDate?: string;
   type: string;
   description: string;
   status: 'Agendado' | 'Em andamento' | 'Encerrado' | 'Cancelado' | 'Erro';
@@ -73,7 +75,7 @@ type RoomInfoType = {
 
 export function useRoom(eventId: string) {
   const { user } = useAuth();
-  const [roomInfo, setRoomInfo] = useState<RoomInfoType>();
+  const [roomInfo, setRoomInfo] = useState<RoomInfoType | any>();
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [chatMessages, setChatMessages] = useState<MessageChatType[]>([]);
 
@@ -81,22 +83,14 @@ export function useRoom(eventId: string) {
     const roomInfoRef = database.ref(`events/${eventId}/info`);
     roomInfoRef.on('value', (events) => {
       const roomInfoEvents = events.val();
-      const firebaseRoomInfo: FirebaseRoomInfoType = roomInfoEvents ?? {};
-      const roomInfoData = Object.values(firebaseRoomInfo)[0];
-      /*
-      const roomInfoParse = {
-        title: roomInfoData?.title ?? '-',
-        authorID: roomInfoData?.authorID ?? '-',
-        youtubeLiveVideoId: roomInfoData?.youtubeLiveVideoId ?? '-',
-        scheduleDate: (`${format(new Date(), 'dd/MM/yyyy, HH:mm')}`) ?? '-',
-        type: roomInfoData?.type ?? '-',
-        description: roomInfoData?.description ?? '-',
-        status: roomInfoData?.status ?? 'Erro',
-        closedOn: roomInfoData?.closedOn ?? null,
-      };
+      const firebaseRoomInfo: FirebaseRoomInfoType = roomInfoEvents;
+      const roomInfoData = (Object.values(firebaseRoomInfo)[0] as any) ?? {};
 
+      const roomInfoParse = {
+        ...roomInfoData,
+        parsedScheduleDate: (`${format(new Date(roomInfoData.scheduleDate), 'eeee, dd/MM/yyyy, HH:mm BBBB.', { locale: ptBR })}`),
+      };
       setRoomInfo(roomInfoParse);
-      */
     });
 
     const roomQuestionsRef = database.ref(`events/${eventId}/questions`);

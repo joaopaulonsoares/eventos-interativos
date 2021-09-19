@@ -28,6 +28,11 @@ export const ChatContainerDiv = styled.div`
       background-color: var(--gray-300);
       border-radius: 10px;
     }
+
+    .chatFeed{
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .chatInputArea {

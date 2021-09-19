@@ -1,6 +1,8 @@
 import React, { FormEvent, useState } from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
 import toast from 'react-hot-toast';
+import ScrollableFeed from 'react-scrollable-feed';
+import Skeleton from 'react-loading-skeleton';
 import { ChatContainerDiv } from './styles';
 import { ChatItem } from '../ChatItem/index';
 import { useAuth } from '../../../hooks/useAuth';
@@ -52,15 +54,21 @@ export function ChatContainer({ eventId }: ChatContainerProps) {
     <ChatContainerDiv>
       <span className="sectionTitle">Chat</span>
       <div className="chatMessages">
-        {chatMessages.map((message) => (
-          <ChatItem
-            key={message.id}
-            id={message.id}
-            authorUser={message.authorUser}
-            timestamp={message.timestamp}
-            message={message.message}
-          />
-        ))}
+        {chatMessages ? (
+          <ScrollableFeed className="chatFeed">
+            {chatMessages.map((message) => (
+              <ChatItem
+                key={message.id}
+                id={message.id}
+                authorUser={message.authorUser}
+                timestamp={message.timestamp}
+                message={message.message}
+              />
+            ))}
+          </ScrollableFeed>
+        ) : (
+          <Skeleton count={3} height={100} />
+        )}
       </div>
       <div className="chatInputArea">
         <textarea

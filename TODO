@@ -1,0 +1,4 @@
+-> Add automatic feed scroll in chat
+-> Fix type of roomInfo in useRoom hooks
+-> Add info room at event pages
+-> add skeleton to fields

@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { FormEvent, useEffect, useState } from 'react';
-import { format } from 'date-fns';
 import { FaPaperPlane } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import ScrollableFeed from 'react-scrollable-feed';
@@ -19,7 +18,6 @@ interface QuestionContainerProps {
 export function QuestionContainer({ eventId }: QuestionContainerProps) {
   const { user } = useAuth();
   const [newUserQuestion, setNewUserQuestion] = useState('');
-  const [fetchingQuestions, setFetchingQuestions] = useState(false);
   const { questions } = useRoom(eventId);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -60,7 +58,7 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
         Perguntas
       </span>
       <div className="questionsArea">
-        {!fetchingQuestions ? (
+        {questions ? (
           <ScrollableFeed className="questionsFeed">
             {questions.map((question) => (
               <QuestionItem
