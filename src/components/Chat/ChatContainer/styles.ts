@@ -121,5 +121,15 @@ export const ChatContainerDiv = styled.div`
         }
       }
     }
+
+    .eventFinishedMessage{
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
   }
 `;

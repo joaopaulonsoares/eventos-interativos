@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { FaPaperPlane } from 'react-icons/fa';
 import toast from 'react-hot-toast';
@@ -12,13 +12,19 @@ import { useRoom } from '../../../hooks/useRoom';
 
 interface ChatContainerProps {
   eventId: string;
+  eventStatus: string;
 }
 
-export function ChatContainer({ eventId }: ChatContainerProps) {
+export function ChatContainer({ eventId, eventStatus }: ChatContainerProps) {
   const { user } = useAuth();
   const { chatMessages } = useRoom(eventId);
   const [userMessage, setUserMessage] = useState('');
   const [showChat, setShowChat] = useState(true);
+  const [status, setStatus] = useState(eventStatus);
+
+  useEffect(() => {
+    setStatus(eventStatus);
+  }, [eventStatus]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUserMessage(event.currentTarget.value);
@@ -55,6 +61,8 @@ export function ChatContainer({ eventId }: ChatContainerProps) {
   const handleShowChatChange = () => {
     setShowChat(!showChat);
   };
+
+  console.log(eventStatus);
 
   return (
     <ChatContainerDiv>
@@ -97,28 +105,38 @@ export function ChatContainer({ eventId }: ChatContainerProps) {
         )}
       </div>
       <div className="chatInputArea">
-        <textarea
-          id="messageInput"
-          name="w3review"
-          rows={4}
-          cols={50}
-          placeholder="Escreva aqui a sua mensagem ..."
-          onChange={handleInputChange}
-          maxLength={240}
-          value={userMessage}
-        />
-        <div className="actionArea">
-          <div className="visualDiv" />
-          <div className="buttonDiv">
-            <span>
-              {userMessage.length}
-              /240
-            </span>
-            <button aria-label="Enviar mensagem no chat" type="button" onClick={handleSendChat} disabled={!user}>
-              <FaPaperPlane color="white" fontSize="1.2em" />
-            </button>
-          </div>
-        </div>
+        {
+          (status === 'Em andamento' || status === 'Agendado') ? (
+            <>
+              <textarea
+                id="messageInput"
+                name="messageInputTextArea"
+                rows={4}
+                placeholder="Escreva aqui a sua mensagem ..."
+                onChange={handleInputChange}
+                maxLength={240}
+                value={userMessage}
+              />
+              <div className="actionArea">
+                <div className="visualDiv" />
+                <div className="buttonDiv">
+                  <span>
+                    {userMessage.length}
+                    /240
+                  </span>
+                  <button aria-label="Enviar mensagem no chat" type="button" onClick={handleSendChat} disabled={!user}>
+                    <FaPaperPlane color="white" fontSize="1.2em" />
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="eventFinishedMessage">
+              Evento encerrado para participações.
+            </div>
+          )
+        }
+
       </div>
     </ChatContainerDiv>
   );

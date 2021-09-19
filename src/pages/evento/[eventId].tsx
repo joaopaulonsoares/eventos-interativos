@@ -116,7 +116,7 @@ const Room: NextPage = () => {
           </div>
 
           <div className="sectionContentDiv">
-            <ChatContainer eventId={evId} />
+            <ChatContainer eventId={evId} eventStatus={roomInfo ? roomInfo.status : 'Loading'} />
           </div>
         </ChatSection>
       </RoomContainer>
