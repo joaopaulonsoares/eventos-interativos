@@ -26,7 +26,7 @@ const Room: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Teste</title>
+        <title>{(roomInfo) ? roomInfo.title : 'Evento'}</title>
       </Head>
       <Header />
 

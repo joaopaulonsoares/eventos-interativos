@@ -13,7 +13,7 @@ export const BadgeEventHappening = styled.div`
     span{
       margin: 0 5px;
       color: var(--white);
-      font-size: 1rem;
+      font-size: 0.7rem;
       font-weight: bold;
     }
 

@@ -38,6 +38,11 @@ export function BadgeComponent({ type }: BadgeProps) {
                 </BadgeEventCanceled>
             );
         default:
-            return <div>oi</div>;
+            return (
+                <BadgeEventHappening className="eventHappening">
+                    <div className="dot-flashing" />
+                    <span>Em andamento</span>
+                </BadgeEventHappening>
+            );
     }
 }
