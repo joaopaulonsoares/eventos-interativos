@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FaArrowLeft } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
+import { AiOutlineWhatsApp, AiOutlineTwitter, AiFillFacebook } from 'react-icons/ai';
 import { VideoPlayer } from '../../components/VideoPlayer';
 import { Header } from '../../components/Header';
 import { ChatContainer } from '../../components/Chat/ChatContainer';
@@ -111,7 +112,11 @@ const Room: NextPage = () => {
               <div>
                 <p>Compartilhar evento</p>
               </div>
-              <div className="shareIcons" />
+              <div className="shareIcons">
+                <button type="button" aria-label="Compartilhar no Whatsapp"><AiOutlineWhatsApp size={30} /></button>
+                <button type="button" aria-label="Compartilhar no Twitter"><AiOutlineTwitter size={30} /></button>
+                <button type="button" aria-label="Compartilhar no Facebook"><AiFillFacebook size={30} /></button>
+              </div>
             </div>
           </div>
 

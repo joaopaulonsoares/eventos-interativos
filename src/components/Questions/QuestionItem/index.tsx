@@ -20,28 +20,33 @@ interface QuestionInterface {
   votesCount: number;
   userVoteId: string | undefined;
   eventId: string;
+  eventStatus: string;
 }
 
 export function QuestionItem({
-  id, authorUser, question, timestamp, eventId, userVoteId, votesCount,
+  id, authorUser, question, timestamp, eventId, userVoteId, votesCount, eventStatus,
 }: QuestionInterface) {
   const { user } = useAuth();
 
   async function handleQuestionVote(questionId: string, userVotedId: string | undefined) {
-    try {
-      if (userVotedId) {
-        // Remove like that exists
-        await database.ref(`events/${eventId}/questions/${questionId}/votes/${userVotedId}`).remove();
-        toast.success('Voto removido com sucesso!', { position: 'top-left' });
-      } else {
-        // Create a like
-        await database.ref(`events/${eventId}/questions/${questionId}/votes`).push({
-          authorId: user?.id,
-        });
-        toast.success('Voto na pergunta computado com sucesso!', { position: 'top-left' });
+    if (eventStatus === 'Em andamento' || eventStatus === 'Agendado') {
+      try {
+        if (userVotedId) {
+          // Remove like that exists
+          await database.ref(`events/${eventId}/questions/${questionId}/votes/${userVotedId}`).remove();
+          toast.success('Voto removido com sucesso!', { position: 'top-left' });
+        } else {
+          // Create a like
+          await database.ref(`events/${eventId}/questions/${questionId}/votes`).push({
+            authorId: user?.id,
+          });
+          toast.success('Voto na pergunta computado com sucesso!', { position: 'top-left' });
+        }
+      } catch (e) {
+        toast.success('Erro ao computar voto.Tente novamente', { position: 'top-left' });
       }
-    } catch (e) {
-      toast.success('Erro ao computar voto.Tente novamente', { position: 'top-left' });
+    } else {
+      toast.error('As participações no evento já se encerraram!', { position: 'top-left' });
     }
   }
 

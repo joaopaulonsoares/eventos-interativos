@@ -77,6 +77,7 @@ export function QuestionContainer({ eventId, eventStatus }: QuestionContainerPro
                 id={question.id}
                 votesCount={question.votesCount}
                 userVoteId={question?.userVoteId}
+                eventStatus={status}
               />
             ))}
           </ScrollableFeed>

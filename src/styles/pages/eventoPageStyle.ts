@@ -115,6 +115,7 @@ export const ChatSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    padding-right: 0.5rem;
 
     p {
       font-size: 1.5rem;
@@ -122,11 +123,17 @@ export const ChatSection = styled.div`
     }
 
     .shareIcons {
-      padding-top: 10px;
-      font-size: 1rem;
-      li {
-        display: inline;
-        margin-right: 10px;
+      display: flex;
+      flex-direction: row;
+
+      button {
+        margin-left: 10px;
+
+        transition: filter 0.2s;
+
+        &:hover {
+          color: var(--gray-300);
+        }
       }
     }
   }

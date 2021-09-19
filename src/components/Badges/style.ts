@@ -54,7 +54,7 @@ export const BadgeEventScheduled = styled.div`
     span{
       margin: 0 10px;
       color: var(--white);
-      font-size: 1rem;
+      font-size: 0.7rem;
       font-weight: bold;
     }
 `;
@@ -72,7 +72,7 @@ export const BadgeEventFinished = styled.div`
     span{
       margin: 0 10px;
       color: var(--white);
-      font-size: 1rem;
+      font-size: 0.7rem;
       font-weight: bold;
     }
 `;
@@ -90,7 +90,7 @@ export const BadgeEventCanceled = styled.div`
     span{
       margin: 0 10px;
       color: var(--white);
-      font-size: 1rem;
+      font-size: 0.7rem;
       font-weight: bold;
     }
 `;
