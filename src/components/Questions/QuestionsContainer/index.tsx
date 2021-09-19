@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { FormEvent, useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { FaPaperPlane } from 'react-icons/fa';
@@ -39,7 +40,7 @@ type QuestionType = {
   question: string;
   timestamp: string;
   votesCount: number;
-  hasVoted: boolean;
+  userVoteId: string | undefined;
 };
 
 export function QuestionContainer({ eventId }: QuestionContainerProps) {
@@ -60,7 +61,9 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
         authorUser: value.authorUser,
         timestamp: (`${format(new Date(value.timestamp), 'dd/MM/yyyy, HH:mm')}`),
         votesCount: Object.values(value.votes ?? {}).length,
-        hasVoted: Object.values(value.votes ?? {}).some((vote) => vote.authorId === user?.id),
+        userVoteId: Object.entries(value.votes ?? {}).find(
+          ([voteKey, vote]) => vote.authorId === user?.id,
+        )?.[0],
       }));
       setQuestions(parsedQuestions);
       setFetchingQuestions(false);
@@ -122,7 +125,7 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
                 eventId={eventId}
                 id={question.id}
                 votesCount={question.votesCount}
-                hasVoted={question.hasVoted}
+                userVoteId={question?.userVoteId}
               />
             ))}
           </ScrollableFeed>

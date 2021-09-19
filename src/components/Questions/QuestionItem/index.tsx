@@ -18,29 +18,35 @@ interface QuestionInterface {
   question: string;
   timestamp: string;
   votesCount: number;
-  hasVoted: boolean;
+  userVoteId: string | undefined;
   eventId: string;
 }
 
 export function QuestionItem({
-  id, authorUser, question, timestamp, eventId, hasVoted, votesCount,
+  id, authorUser, question, timestamp, eventId, userVoteId, votesCount,
 }: QuestionInterface) {
   const { user } = useAuth();
 
-  async function handleQuestionVote(questionId: string) {
+  async function handleQuestionVote(questionId: string, userVotedId: string | undefined) {
     try {
-      await database.ref(`events/${eventId}/questions/${questionId}/votes`).push({
-        authorId: user?.id,
-      });
-      toast.success('Voto computado com sucesso na pergunta!', { position: 'top-left' });
-      // useToast('Voto computado com sucesso na pergunta!', 'success', 'top-left');
+      if (userVotedId) {
+        // Remove like that exists
+        await database.ref(`events/${eventId}/questions/${questionId}/votes/${userVotedId}`).remove();
+        toast.success('Voto removido com sucesso!', { position: 'top-left' });
+      } else {
+        // Create a like
+        await database.ref(`events/${eventId}/questions/${questionId}/votes`).push({
+          authorId: user?.id,
+        });
+        toast.success('Voto na pergunta computado com sucesso!', { position: 'top-left' });
+      }
     } catch (e) {
       toast.success('Erro ao computar voto.Tente novamente', { position: 'top-left' });
     }
   }
 
   return (
-    <QuestionBox hasVoted={hasVoted}>
+    <QuestionBox userVoteId={userVoteId}>
       <div className="messageContent">
         <p>
           <span className="userMessage">{question}</span>
@@ -60,7 +66,7 @@ export function QuestionItem({
           <div className="vote">
             <button
               type="button"
-              onClick={() => handleQuestionVote(id)}
+              onClick={() => handleQuestionVote(id, userVoteId)}
               aria-label="Votar na questão"
             >
               <span>{votesCount}</span>
