@@ -1,6 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaArrowLeft } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
@@ -35,10 +36,12 @@ const Room: NextPage = () => {
         <QuestionsSection>
           <div className="sectionHeadDiv">
             <div className="buttonDiv">
-              <button type="button">
-                <FaArrowLeft className="icon" />
-                Voltar para a agenda
-              </button>
+              <Link href="/">
+                <button type="button">
+                  <FaArrowLeft className="icon" />
+                  Voltar para o inicio
+                </button>
+              </Link>
             </div>
           </div>
 
