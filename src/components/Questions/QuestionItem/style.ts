@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const QuestionBox = styled.div`
+interface QuestionBoxProps {
+  hasVoted: boolean;
+}
+
+export const QuestionBox = styled.div<QuestionBoxProps>`
   background-color: var(--gray-200);
   width: 100%;
   height: auto;
@@ -65,7 +69,7 @@ export const QuestionBox = styled.div`
       align-items: center;
 
       button {
-        color: var(--gray-400);
+        color: ${(props) => (props.hasVoted ? 'var(--yellow)' : 'var(--gray-400)')};
         background: none;
         display: flex;
         align-items: flex-end;

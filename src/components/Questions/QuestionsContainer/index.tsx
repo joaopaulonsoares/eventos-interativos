@@ -24,6 +24,9 @@ type FirebaseQuestionsType = Record<
     question: string;
     timestamp: Date;
     id: string;
+    votes: Record<string, {
+      authorId: string,
+    }>;
   }
 >;
 
@@ -35,6 +38,8 @@ type QuestionType = {
   };
   question: string;
   timestamp: string;
+  votesCount: number;
+  hasVoted: boolean;
 };
 
 export function QuestionContainer({ eventId }: QuestionContainerProps) {
@@ -54,11 +59,17 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
         question: value.question,
         authorUser: value.authorUser,
         timestamp: (`${format(new Date(value.timestamp), 'dd/MM/yyyy, HH:mm')}`),
+        votesCount: Object.values(value.votes ?? {}).length,
+        hasVoted: Object.values(value.votes ?? {}).some((vote) => vote.authorId === user?.id),
       }));
       setQuestions(parsedQuestions);
       setFetchingQuestions(false);
     });
-  }, [eventId]);
+
+    return () => {
+      roomRef.off('value');
+    };
+  }, [eventId, user?.id]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewUserQuestion(event.currentTarget.value);
@@ -110,6 +121,8 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
                 question={question.question}
                 eventId={eventId}
                 id={question.id}
+                votesCount={question.votesCount}
+                hasVoted={question.hasVoted}
               />
             ))}
           </ScrollableFeed>

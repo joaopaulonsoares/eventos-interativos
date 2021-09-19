@@ -17,11 +17,13 @@ interface QuestionInterface {
   authorUser: AuthorUserInterface;
   question: string;
   timestamp: string;
-  eventId: string,
+  votesCount: number;
+  hasVoted: boolean;
+  eventId: string;
 }
 
 export function QuestionItem({
-  id, authorUser, question, timestamp, eventId,
+  id, authorUser, question, timestamp, eventId, hasVoted, votesCount,
 }: QuestionInterface) {
   const { user } = useAuth();
 
@@ -38,7 +40,7 @@ export function QuestionItem({
   }
 
   return (
-    <QuestionBox>
+    <QuestionBox hasVoted={hasVoted}>
       <div className="messageContent">
         <p>
           <span className="userMessage">{question}</span>
@@ -61,7 +63,7 @@ export function QuestionItem({
               onClick={() => handleQuestionVote(id)}
               aria-label="Votar na questão"
             >
-              <span>10</span>
+              <span>{votesCount}</span>
               <Icon as={AiOutlineLike} />
             </button>
 
