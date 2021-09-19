@@ -10,69 +10,17 @@ import { QuestionItem } from '../QuestionItem/index';
 
 import { useAuth } from '../../../hooks/useAuth';
 import { database } from '../../../services/firebase';
+import { useRoom } from '../../../hooks/useRoom';
 
 interface QuestionContainerProps {
   eventId: string;
 }
 
-type FirebaseQuestionsType = Record<
-  string,
-  {
-    authorUser: {
-      name: string;
-      avatar: string;
-    };
-    question: string;
-    timestamp: Date;
-    id: string;
-    votes: Record<string, {
-      authorId: string,
-    }>;
-  }
->;
-
-type QuestionType = {
-  id: string;
-  authorUser: {
-    name: string;
-    avatar: string;
-  };
-  question: string;
-  timestamp: string;
-  votesCount: number;
-  userVoteId: string | undefined;
-};
-
 export function QuestionContainer({ eventId }: QuestionContainerProps) {
   const { user } = useAuth();
   const [newUserQuestion, setNewUserQuestion] = useState('');
-  const [questions, setQuestions] = useState<QuestionType[]>([]);
-  const [fetchingQuestions, setFetchingQuestions] = useState(true);
-
-  useEffect(() => {
-    const roomRef = database.ref(`events/${eventId}/questions`);
-
-    roomRef.on('value', (events) => {
-      const databaseEvents = events.val();
-      const firebaseQuestions: FirebaseQuestionsType = databaseEvents ?? {};
-      const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => ({
-        id: key,
-        question: value.question,
-        authorUser: value.authorUser,
-        timestamp: (`${format(new Date(value.timestamp), 'dd/MM/yyyy, HH:mm')}`),
-        votesCount: Object.values(value.votes ?? {}).length,
-        userVoteId: Object.entries(value.votes ?? {}).find(
-          ([voteKey, vote]) => vote.authorId === user?.id,
-        )?.[0],
-      }));
-      setQuestions(parsedQuestions);
-      setFetchingQuestions(false);
-    });
-
-    return () => {
-      roomRef.off('value');
-    };
-  }, [eventId, user?.id]);
+  const [fetchingQuestions, setFetchingQuestions] = useState(false);
+  const { questions } = useRoom(eventId);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewUserQuestion(event.currentTarget.value);
