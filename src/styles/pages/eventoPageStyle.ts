@@ -78,12 +78,30 @@ export const VideoSection = styled.div`
     height: 60%;
   }
 
-  .eventInformation {
+  .sectionFooter {
     height: 30%;
     width: 100%;
-    padding: 1rem;
-    background-color: var(--gray-200);
+
+    .eventStatus{
+      height: 15%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      span {
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    }
+
+    .eventInformation {
+      height: 85%;
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--gray-200);
+    }
   }
+
 `;
 
 export const ChatSection = styled.div`

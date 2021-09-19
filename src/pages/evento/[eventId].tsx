@@ -15,6 +15,7 @@ import {
   ChatSection,
 } from '../../styles/pages/eventoPageStyle';
 import { useRoom } from '../../hooks/useRoom';
+import { BadgeComponent } from '../../components/Badges';
 
 const Room: NextPage = () => {
   const router = useRouter();
@@ -50,7 +51,7 @@ const Room: NextPage = () => {
             <div className="sectionTitleInformation">
               {
                 roomInfo?.title ? (
-                  <span>{roomInfo.title}</span>
+                  <h1>{roomInfo.title}</h1>
                 ) : (
                   <Skeleton height="20%" width="100%" />
                 )
@@ -60,7 +61,7 @@ const Room: NextPage = () => {
             <div className="sectionSubTitleInformation">
               {
                 roomInfo?.parsedScheduleDate ? (
-                  <span>{`${roomInfo.type} - ${roomInfo.parsedScheduleDate}`}</span>
+                  <h2>{`${roomInfo.type} - ${roomInfo.parsedScheduleDate}`}</h2>
                 ) : (
                   <Skeleton height="20%" width="40%" />
                 )
@@ -78,15 +79,30 @@ const Room: NextPage = () => {
             }
           </div>
 
-          <div className="eventInformation">
-            {
-              roomInfo?.description ? (
-                <span>{roomInfo.description}</span>
-              ) : (
-                <Skeleton height="100%" width="100%" />
-              )
-            }
+          <div className="sectionFooter">
+            <div className="eventStatus">
+              {
+                roomInfo?.status ? (
+                  <>
+                    <span>Descrição</span>
+                    <BadgeComponent type={roomInfo.status} />
+                  </>
+                ) : (
+                  <Skeleton height="100%" width="100%" />
+                )
+              }
+            </div>
+            <div className="eventInformation">
+              {
+                roomInfo?.description ? (
+                  <span>{roomInfo.description}</span>
+                ) : (
+                  <Skeleton height="100%" width="100%" />
+                )
+              }
+            </div>
           </div>
+
         </VideoSection>
 
         <ChatSection>
