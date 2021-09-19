@@ -14,18 +14,23 @@ const CreateEvent: NextPage = () => {
   async function handleCreateNewEvent(event: FormEvent) {
     event.preventDefault();
 
-    const roomRef = database.ref('events');
+    const roomRef = database.ref('events/');
 
-    await roomRef.push({
+    const newPushRef = await roomRef.push();
+    const eventId = newPushRef.key;
+
+    const roomInfo = {
       title: eventTitle,
-      youtube_id: eventVideo,
-      event_author: user?.id,
-      event_day: '11/09/2021',
-      event_hour: '09:00',
-      event_type: 'Audiência Pública',
-      event_description: 'Uma descrição qualquer do evento e suas informações',
-      event_status: 'Agendado',
-    });
+      authorID: user?.id,
+      youtubeLiveVideoId: eventVideo,
+      scheduleDate: Date.now(),
+      type: 'Audiência Pública',
+      description: 'Uma descrição qualquer do evento e suas informações',
+      status: 'Agendado',
+      closedOn: null,
+    };
+
+    await database.ref(`events/${eventId}/info`).push(roomInfo);
   }
 
   const handleEventTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
