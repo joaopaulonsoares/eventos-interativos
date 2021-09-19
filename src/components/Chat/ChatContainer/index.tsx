@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { FaPaperPlane } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import ScrollableFeed from 'react-scrollable-feed';
@@ -17,6 +18,7 @@ export function ChatContainer({ eventId }: ChatContainerProps) {
   const { user } = useAuth();
   const { chatMessages } = useRoom(eventId);
   const [userMessage, setUserMessage] = useState('');
+  const [showChat, setShowChat] = useState(true);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUserMessage(event.currentTarget.value);
@@ -50,22 +52,46 @@ export function ChatContainer({ eventId }: ChatContainerProps) {
     }
   }
 
+  const handleShowChatChange = () => {
+    setShowChat(!showChat);
+  };
+
   return (
     <ChatContainerDiv>
-      <span className="sectionTitle">Chat</span>
+      <div className="sectionHeader">
+        <span className="sectionTitle">Chat</span>
+        {showChat ? (
+          <button type="button" aria-label="Ocultar Chat" title="Ocultar Chat" onClick={() => handleShowChatChange()}>
+            <AiFillEyeInvisible size={30} />
+          </button>
+        ) : (
+          <button type="button" aria-label="Ver Chat" title="Ver Chat" onClick={() => handleShowChatChange()}>
+            <AiFillEye size={30} />
+          </button>
+        )}
+      </div>
       <div className="chatMessages">
         {chatMessages ? (
-          <ScrollableFeed className="chatFeed">
-            {chatMessages.map((message) => (
-              <ChatItem
-                key={message.id}
-                id={message.id}
-                authorUser={message.authorUser}
-                timestamp={message.timestamp}
-                message={message.message}
-              />
-            ))}
-          </ScrollableFeed>
+          <>
+            {showChat ? (
+              <ScrollableFeed className="chatFeed">
+                {chatMessages.map((message) => (
+                  <ChatItem
+                    key={message.id}
+                    id={message.id}
+                    authorUser={message.authorUser}
+                    timestamp={message.timestamp}
+                    message={message.message}
+                  />
+                ))}
+              </ScrollableFeed>
+            ) : (
+              <div className="hideChatMessages">
+                <p>Chat ocultado!</p>
+                <p> Para visualizar novamente clique no botão acima.</p>
+              </div>
+            )}
+          </>
         ) : (
           <Skeleton count={3} height={100} />
         )}
