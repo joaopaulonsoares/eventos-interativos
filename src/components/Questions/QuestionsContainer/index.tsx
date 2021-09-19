@@ -44,8 +44,8 @@ type QuestionType = {
 };
 
 export function QuestionContainer({ eventId }: QuestionContainerProps) {
-  const [newUserQuestion, setNewUserQuestion] = useState('');
   const { user } = useAuth();
+  const [newUserQuestion, setNewUserQuestion] = useState('');
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [fetchingQuestions, setFetchingQuestions] = useState(true);
 
@@ -109,9 +109,7 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
   return (
     <ChatContainerDiv>
       <span className="sectionTitle">
-        Perguntas (
-        {eventId}
-        )
+        Perguntas
       </span>
       <div className="questionsArea">
         {!fetchingQuestions ? (

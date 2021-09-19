@@ -69,7 +69,7 @@ const Room: NextPage = () => {
           </div>
 
           <div className="sectionContentDiv">
-            <ChatContainer />
+            <ChatContainer eventId={evId} />
           </div>
         </ChatSection>
       </RoomContainer>
