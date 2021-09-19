@@ -83,18 +83,20 @@ export function useRoom(eventId: string) {
       const roomInfoEvents = events.val();
       const firebaseRoomInfo: FirebaseRoomInfoType = roomInfoEvents ?? {};
       const roomInfoData = Object.values(firebaseRoomInfo)[0];
+      /*
       const roomInfoParse = {
-        title: roomInfo?.title ?? '-',
-        authorID: roomInfo?.authorID ?? '-',
-        youtubeLiveVideoId: roomInfo?.youtubeLiveVideoId ?? '-',
+        title: roomInfoData?.title ?? '-',
+        authorID: roomInfoData?.authorID ?? '-',
+        youtubeLiveVideoId: roomInfoData?.youtubeLiveVideoId ?? '-',
         scheduleDate: (`${format(new Date(), 'dd/MM/yyyy, HH:mm')}`) ?? '-',
-        type: roomInfo?.type ?? '-',
-        description: roomInfo?.description ?? '-',
-        status: roomInfo?.status ?? 'Erro',
-        closedOn: roomInfo?.closedOn ?? null,
+        type: roomInfoData?.type ?? '-',
+        description: roomInfoData?.description ?? '-',
+        status: roomInfoData?.status ?? 'Erro',
+        closedOn: roomInfoData?.closedOn ?? null,
       };
 
       setRoomInfo(roomInfoParse);
+      */
     });
 
     const roomQuestionsRef = database.ref(`events/${eventId}/questions`);

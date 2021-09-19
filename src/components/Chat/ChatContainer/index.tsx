@@ -3,10 +3,9 @@ import { FaPaperPlane } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { ChatContainerDiv } from './styles';
 import { ChatItem } from '../ChatItem/index';
-
-import { messageArrayMock } from './mock';
 import { useAuth } from '../../../hooks/useAuth';
 import { database } from '../../../services/firebase';
+import { useRoom } from '../../../hooks/useRoom';
 
 interface ChatContainerProps {
   eventId: string;
@@ -14,6 +13,7 @@ interface ChatContainerProps {
 
 export function ChatContainer({ eventId }: ChatContainerProps) {
   const { user } = useAuth();
+  const { chatMessages } = useRoom(eventId);
   const [userMessage, setUserMessage] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -30,7 +30,7 @@ export function ChatContainer({ eventId }: ChatContainerProps) {
       toast.error('O usuário não está logado!', { position: 'top-center' });
     }
 
-    const chatMessaeg = {
+    const chatMessage = {
       message: userMessage,
       authorUser: {
         name: user?.name,
@@ -40,7 +40,7 @@ export function ChatContainer({ eventId }: ChatContainerProps) {
     };
 
     try {
-      await database.ref(`events/${eventId}/chat`).push(chatMessaeg);
+      await database.ref(`events/${eventId}/chat`).push(chatMessage);
       toast.success('Mensagem enviada com sucesso!', { position: 'bottom-right' });
       setUserMessage('');
     } catch (e) {
@@ -52,12 +52,13 @@ export function ChatContainer({ eventId }: ChatContainerProps) {
     <ChatContainerDiv>
       <span className="sectionTitle">Chat</span>
       <div className="chatMessages">
-        {messageArrayMock.map((item) => (
+        {chatMessages.map((message) => (
           <ChatItem
-            key={item.id}
-            user={item.user}
-            timestamp={item.timestamp}
-            message={item.message}
+            key={message.id}
+            id={message.id}
+            authorUser={message.authorUser}
+            timestamp={message.timestamp}
+            message={message.message}
           />
         ))}
       </div>
