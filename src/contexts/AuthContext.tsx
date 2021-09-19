@@ -1,5 +1,8 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { auth, firebase } from "../services/firebase";
+/* eslint-disable react/destructuring-assignment */
+import React, {
+  createContext, ReactNode, useEffect, useState,
+} from 'react';
+import { auth, firebase } from '../services/firebase';
 
 type User = {
   id: string;
@@ -22,12 +25,12 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        const { displayName, photoURL, uid } = user;
+    const unsubscribe = auth.onAuthStateChanged((userRes) => {
+      if (userRes) {
+        const { displayName, photoURL, uid } = userRes;
 
         if (!displayName || !photoURL) {
-          throw new Error("Missing information from Google Account.");
+          throw new Error('Missing information from Google Account.');
         }
 
         setUser({
@@ -52,7 +55,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       const { displayName, photoURL, uid } = result.user;
 
       if (!displayName || !photoURL) {
-        throw new Error("Missing information from Google Account.");
+        throw new Error('Missing information from Google Account.');
       }
 
       setUser({

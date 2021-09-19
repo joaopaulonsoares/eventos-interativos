@@ -62,15 +62,33 @@ export const QuestionBox = styled.div`
     .vote {
       display: flex;
       flex-direction: row-reverse;
+      align-items: center;
 
       button {
-        color: var(--yellow);
+        color: var(--gray-400);
         background: none;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: brightness(0.1);
+        }
 
         svg {
           width: 25px;
           height: 25px;
         }
+
+        span {
+          margin-bottom: 0;
+          font-size: 1rem;
+          padding-right: 5px;
+        }
+      }
+
+      span {
       }
     }
   }

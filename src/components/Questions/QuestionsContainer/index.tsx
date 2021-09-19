@@ -17,18 +17,19 @@ interface QuestionContainerProps {
 type FirebaseQuestionsType = Record<
   string,
   {
-    user: {
+    authorUser: {
       name: string;
       avatar: string;
     };
     question: string;
     timestamp: Date;
+    id: string;
   }
 >;
 
 type QuestionType = {
   id: string;
-  user: {
+  authorUser: {
     name: string;
     avatar: string;
   };
@@ -51,7 +52,7 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
       const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => ({
         id: key,
         question: value.question,
-        user: value.user,
+        authorUser: value.authorUser,
         timestamp: (`${format(new Date(value.timestamp), 'dd/MM/yyyy, HH:mm')}`),
       }));
       setQuestions(parsedQuestions);
@@ -75,7 +76,7 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
 
     const question = {
       question: newUserQuestion,
-      user: {
+      authorUser: {
         name: user?.name,
         avatar: user?.avatar,
       },
@@ -104,9 +105,11 @@ export function QuestionContainer({ eventId }: QuestionContainerProps) {
             {questions.map((question) => (
               <QuestionItem
                 key={`${question.id}`}
-                user={question.user}
+                authorUser={question.authorUser}
                 timestamp={question.timestamp}
                 question={question.question}
+                eventId={eventId}
+                id={question.id}
               />
             ))}
           </ScrollableFeed>
