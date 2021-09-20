@@ -2,28 +2,19 @@ import React from 'react';
 import { Search2Icon } from '@chakra-ui/icons';
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { Section } from './styles';
+import { StackedEventsList } from '../../ListOfEvents/StackedEventsList';
 
 interface SectionContainerInterface {
-  eventStatus: string;
-  children?: React.ReactNode;
+  eventsList: any;
 }
 
-export function SectionContainer({ eventStatus, children }: SectionContainerInterface) {
-  if (eventStatus === 'Em andamento') {
-    return (
-      <Section>
-        <div className="sectionHeader">
-          <h2>Acontecendo agora</h2>
-          <span>Ao vivo</span>
-        </div>
-        {children}
-      </Section>
-    );
-  }
+export function ScheduleEventsSection(
+  { eventsList }: SectionContainerInterface,
+) {
   return (
     <Section>
       <div className="sectionHeader">
-        <h2>{eventStatus}</h2>
+        <h2>Eventos Agendados</h2>
         <InputGroup className="inputGroup">
           <InputLeftElement pointerEvents="none">
             <Search2Icon color="gray.300" />
@@ -31,9 +22,8 @@ export function SectionContainer({ eventStatus, children }: SectionContainerInte
           <Input type="text" placeholder="Pesquisar" variant="flushed" />
         </InputGroup>
       </div>
-      <div>
-        {children}
-      </div>
+
+      <StackedEventsList eventsList={eventsList} />
     </Section>
   );
 }

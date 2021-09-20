@@ -6,14 +6,13 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CarouselComponent } from '../components/Carousel/index';
 import { Container } from '../styles/pages/homePageStyle';
 import { Header } from '../components/Header';
 import logoImg from '../assets/images/logo_banner.png';
 import { database } from '../services/firebase';
 
-import { SectionContainer } from '../components/ListOfEvents/SectionContainer/index';
-import { EventCard } from '../components/ListOfEvents/EventCard';
+import { LiveEventsSection } from '../components/HomePage/LiveEventsSection/index';
+import { ScheduleEventsSection } from '../components/HomePage/ScheduledEventsSection/index';
 
 const Home: NextPage = (props: any) => {
     const { eventsScheduled, eventsLive, eventsFinished } = props;
@@ -33,32 +32,13 @@ const Home: NextPage = (props: any) => {
                         <Image src={logoImg} alt="Logo" />
                     </div>
 
-                    <SectionContainer eventStatus="Em andamento">
-                        <CarouselComponent>
-                            {eventsLive.map((event: any) => (
-                                <EventCard
-                                  title={event.title}
-                                  eventType={event.type}
-                                  eventId={event.roomId}
-                                  eventLiveId={event.youtubeLiveVideoId}
-                                  eventScheduledHour={event.scheduleTimeStamp}
-                                />
-                            ))}
-                        </CarouselComponent>
-                    </SectionContainer>
+                    <LiveEventsSection eventsList={eventsLive} />
 
-                    <SectionContainer eventStatus="Agendados">
-                        {eventsScheduled.map((event: any) => <Link href={`/evento/${event.roomId}`}><a>{event.title}</a></Link>)}
-                    </SectionContainer>
-
-                    <SectionContainer eventStatus="Encerrados">
-                        {eventsFinished.map((event: any) => <Link href={`/evento/${event.roomId}`}><a>{event.title}</a></Link>)}
-                    </SectionContainer>
+                    <ScheduleEventsSection eventsList={eventsScheduled} />
 
                 </Container>
             </main>
 
-            <footer>Teste</footer>
         </div>
     );
 };

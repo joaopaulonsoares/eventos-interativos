@@ -19,7 +19,7 @@ export function CarouselComponent({ children }: CarouselProps) {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -36,11 +36,10 @@ export function CarouselComponent({ children }: CarouselProps) {
       autoPlay={false}
       centerMode={false}
       className=""
-      containerClass="container-with-dots"
+      containerClass="carousel-container"
       dotListClass=""
       draggable
       focusOnSelect={false}
-      itemClass=""
       keyBoardControl
       minimumTouchDrag={80}
       renderButtonGroupOutside
@@ -48,8 +47,9 @@ export function CarouselComponent({ children }: CarouselProps) {
       responsive={responsive}
       showDots
       sliderClass=""
-      slidesToSlide={3}
+      removeArrowOnDeviceType={['mobile']}
       swipeable
+      itemClass="carousel-item-padding-40-px"
     >
       {children}
     </Carousel>

@@ -8,7 +8,6 @@ export const Card = styled.div`
     justify-content: space-around;
     border: 5px solid var(--gray-200);
     border-radius: 25px;
-    margin: 20px;
 
     &:hover {
         border: 5px solid var(--gray-300);
