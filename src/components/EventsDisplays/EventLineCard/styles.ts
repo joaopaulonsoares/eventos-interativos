@@ -112,6 +112,7 @@ export const LineCard = styled.div`
         button {
             margin-bottom: 0;
             span {
+                color: var(--gray-400);
                 font-size: 1.2rem;
                 font-weight: 700;
             }

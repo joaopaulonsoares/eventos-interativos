@@ -4,7 +4,6 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '../styles/pages/homePageStyle';
 import { Header } from '../components/Header';
@@ -70,7 +69,7 @@ export async function getStaticProps() {
         values = parsedEvents;
     });
 
-    const recentEvents = values.reverse();
+    const recentEvents = values.sort((x:any, y:any) => x.scheduleTimeStamp - y.scheduleTimeStamp);
 
     return {
         props: {
