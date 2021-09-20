@@ -20,12 +20,6 @@ export function ScheduleEventsSection(
 
   function handleEventsFilter(filterTerm: string) {
     return eventsList.filter((event : any) => Object.values(event).some((value: any) => (`${value}`).toLowerCase().includes(filterTerm)));
-
-    /*
-    return eventsList.filter(
-      (event: any) => JSON.stringify(event).toLowerCase().includes(filterTerm.toLowerCase()),
-    );
-    */
   }
 
   const handleSearchText = (e: any) => {

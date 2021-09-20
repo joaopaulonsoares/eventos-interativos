@@ -27,13 +27,13 @@ const Home: NextPage = (props: any) => {
 
             <main>
                 <Container>
-                    <div>
                         <Image src={logoImg} alt="Logo" />
-                    </div>
 
                     <LiveEventsSection eventsList={eventsLive} />
 
                     <ScheduleEventsSection eventsList={eventsScheduled} />
+
+                    <ScheduleEventsSection eventsList={eventsFinished} />
 
                 </Container>
             </main>
@@ -94,7 +94,7 @@ export async function getStaticProps() {
             eventsLive: eventsLiveAux,
             eventsScheduled: eventsScheduledAux,
             eventsFinished: eventsFinishedAux,
-        }, // will be passed to the page component as props
+        },
         revalidate: 100,
     };
 }
