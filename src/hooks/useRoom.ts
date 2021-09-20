@@ -101,7 +101,7 @@ export function useRoom(eventId: string) {
         id: key,
         question: value.question,
         authorUser: value.authorUser,
-        timestamp: (`${format(new Date(value.timestamp), 'dd/MM/yyyy, HH:mm')}`),
+        timestamp: (`${format(new Date(value.timestamp), 'dd/MM/yyyy, HH:mm', { locale: ptBR })}`),
         votesCount: Object.values(value.votes ?? {}).length,
         userVoteId: Object.entries(value.votes ?? {}).find(
           ([voteKey, vote]) => vote.authorId === user?.id,
@@ -118,7 +118,7 @@ export function useRoom(eventId: string) {
         id: key,
         message: value.message,
         authorUser: value.authorUser,
-        timestamp: (`${format(new Date(value.timestamp), 'dd/MM/yyyy, HH:mm')}`),
+        timestamp: (`${format(new Date(value.timestamp), 'dd/MM/yyyy, HH:mm', { locale: ptBR })}`),
       }));
       setChatMessages(parsedMessages);
     });
