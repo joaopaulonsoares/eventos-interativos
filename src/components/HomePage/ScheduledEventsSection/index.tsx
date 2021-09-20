@@ -37,7 +37,6 @@ export function ScheduleEventsSection(
 
     setSearchedText(e.target.value);
     const auxFilteredEvents = handleEventsFilter(e.target.value);
-    console.log(auxFilteredEvents);
     setFilteredEvents(auxFilteredEvents);
   };
 

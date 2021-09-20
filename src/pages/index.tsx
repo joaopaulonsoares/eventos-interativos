@@ -71,11 +71,29 @@ export async function getStaticProps() {
 
     const recentEvents = values.sort((x:any, y:any) => x.scheduleTimeStamp - y.scheduleTimeStamp);
 
+    const eventsLiveAux: any[] = [];
+    const eventsScheduledAux: any[] = [];
+    const eventsFinishedAux: any[] = [];
+
+    recentEvents.forEach((event: any) => {
+        switch (event.status) {
+            case 'Em andamento':
+                eventsLiveAux.push(event);
+                break;
+            case 'Agendado':
+                eventsScheduledAux.push(event);
+                break;
+            default:
+                eventsFinishedAux.push(event);
+                break;
+        }
+    });
+
     return {
         props: {
-            eventsLive: recentEvents ? recentEvents.filter((event: any) => event.status === 'Em andamento') : [],
-            eventsScheduled: recentEvents ? recentEvents.filter((event: any) => event.status === 'Agendado') : [],
-            eventsFinished: recentEvents ? recentEvents.filter((event: any) => event.status !== 'Agendado' && event.status !== 'Em andamento') : [],
+            eventsLive: eventsLiveAux,
+            eventsScheduled: eventsScheduledAux,
+            eventsFinished: eventsFinishedAux,
         }, // will be passed to the page component as props
         revalidate: 100,
     };
