@@ -33,6 +33,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [x] Pesquisa de eventos agendados;
 
 ### Funcionalidades que serão implementadas
+- [ ] Lista de palavras proibidas em chats em perguntas com moderação automática do sistema;
 - [ ] Painel de Administração do sistema para usuários administradores;
 - [ ] Página de estatísticas para os usuários administradores;
 - [ ] Moderação do Chat por parte dos administradores;
