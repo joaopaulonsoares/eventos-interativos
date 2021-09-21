@@ -12,6 +12,7 @@ import { database } from '../services/firebase';
 
 import { LiveEventsSection } from '../components/HomePage/LiveEventsSection/index';
 import { ScheduleEventsSection } from '../components/HomePage/ScheduledEventsSection/index';
+import { FinishedEventsSection } from '../components/HomePage/FinishedEventsSection';
 
 const Home: NextPage = (props: any) => {
     const { eventsScheduled, eventsLive, eventsFinished } = props;
@@ -27,13 +28,13 @@ const Home: NextPage = (props: any) => {
 
             <main>
                 <Container>
-                        <Image src={logoImg} alt="Logo" />
+                    <Image src={logoImg} alt="Logo" />
 
                     <LiveEventsSection eventsList={eventsLive} />
 
                     <ScheduleEventsSection eventsList={eventsScheduled} />
 
-                    <ScheduleEventsSection eventsList={eventsFinished} />
+                    <FinishedEventsSection eventsList={eventsFinished.slice(0, 3)} />
 
                 </Container>
             </main>
