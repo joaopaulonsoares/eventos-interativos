@@ -3,6 +3,7 @@ import { Search2Icon } from '@chakra-ui/icons';
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { Section } from './styles';
 import { StackedEventsList } from '../../ListOfEvents/StackedEventsList';
+import { filterArrayOfObjects } from '../../../utils/filterArrayOfObjects';
 
 interface SectionContainerInterface {
   eventsList: any;
@@ -18,10 +19,6 @@ export function ScheduleEventsSection(
     setFilteredEvents(eventsList);
   }, [eventsList]);
 
-  function handleEventsFilter(filterTerm: string) {
-    return eventsList.filter((event : any) => Object.values(event).some((value: any) => (`${value}`).toLowerCase().includes(filterTerm)));
-  }
-
   const handleSearchText = (e: any) => {
     e.preventDefault();
     // Search was cleaned or is empty => reset data to initial state
@@ -30,7 +27,7 @@ export function ScheduleEventsSection(
     }
 
     setSearchedText(e.target.value);
-    const auxFilteredEvents = handleEventsFilter(e.target.value);
+    const auxFilteredEvents = filterArrayOfObjects(eventsList, e.target.value);
     setFilteredEvents(auxFilteredEvents);
   };
 
