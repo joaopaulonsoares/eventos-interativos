@@ -5,12 +5,13 @@ import { HeaderContainer } from './styles';
 import { LoginLogoutButton } from '../LoginLogoutButton';
 
 export function Header() {
-  const isHomePage = false;
+  // const isHomePage = false;
   return (
     <HeaderContainer>
       <Image src={logoImg} alt="Logo" />
 
-      {!isHomePage && (
+      {/*
+       !isHomePage && (
         <nav>
           <a href="https://localhost:3000/">Página inicial</a>
           <a href="https://localhost:3000/" className="active">
@@ -18,7 +19,8 @@ export function Header() {
           </a>
           <a href="https://localhost:3000/">Agenda</a>
         </nav>
-      )}
+      ) */
+      }
 
       <LoginLogoutButton />
     </HeaderContainer>

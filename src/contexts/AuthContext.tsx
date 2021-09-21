@@ -7,6 +7,7 @@ import { auth, firebase } from '../services/firebase';
 type User = {
   id: string;
   name: string;
+  shortName: string;
   avatar: string;
 };
 
@@ -33,10 +34,13 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
           throw new Error('Missing information from Google Account.');
         }
 
+        const shortName = displayName.split(' ');
+
         setUser({
           id: uid,
           name: displayName,
           avatar: photoURL,
+          shortName: `${shortName[0]} ${shortName[1] ? shortName[1] : ''}`,
         });
       }
     });
@@ -58,10 +62,13 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         throw new Error('Missing information from Google Account.');
       }
 
+      const shortName = displayName.split(' ');
+
       setUser({
         id: uid,
         name: displayName,
         avatar: photoURL,
+        shortName: `${shortName[0]} ${shortName[1] ? shortName[1] : ''}`,
       });
     }
   }

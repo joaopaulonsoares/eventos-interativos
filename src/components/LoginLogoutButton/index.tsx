@@ -12,7 +12,7 @@ export function LoginLogoutButton() {
   return isUserLoggedIn ? (
     <LogoutButton type="button">
       <Avatar size="xs" name="Dan Abrahmov" src={user.avatar} />
-      {user.name}
+      <span>{user.shortName}</span>
       <AiOutlineLogout />
     </LogoutButton>
   ) : (

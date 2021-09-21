@@ -33,4 +33,8 @@ export const LogoutButton = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  span {
+    font-weight: 700;
+  }
 `;
