@@ -10,6 +10,7 @@ const CreateEvent: NextPage = () => {
   const { user } = useAuth();
   const [eventTitle, setEventTitle] = useState('');
   const [eventVideo, setEventVideo] = useState('');
+  const [eventType, setEventType] = useState('');
 
   async function handleCreateNewEvent(event: FormEvent) {
     event.preventDefault();
@@ -41,6 +42,10 @@ const CreateEvent: NextPage = () => {
     setEventVideo(e.currentTarget.value);
   };
 
+  const handleEventTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEventType(e.currentTarget.value);
+  };
+
   return (
     <div>
       <Head>
@@ -55,9 +60,10 @@ const CreateEvent: NextPage = () => {
         <div>
           <label htmlFor="name">Título</label>
           <input id="titulo" type="text" required onChange={handleEventTitleChange} />
-          <label htmlFor="name">Video do Youtube</label>
+          <label htmlFor="youtubeVideo">Video do Youtube</label>
           <input id="youtubeVideo" type="text" required onChange={handleEventVideoChange} />
-
+          <label htmlFor="eventType">Tipo do Evento</label>
+          <input id="eventType" type="text" required onChange={handleEventTypeChange} value={eventType} />
           <button type="button" onClick={handleCreateNewEvent}>
             Cadastrar
           </button>
