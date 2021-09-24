@@ -10,7 +10,7 @@
 
 ## 💻 Projeto
 
-Eventos Interativos é um projeto baseado na aplicação Audiências Interativas da Câmara dos deputados. Permite a interação de pessoas durante uma transmissão ao vivo por meio de um chat e de uma sessão de perguntas que podem ser utilizadas pelos administradores para fomentar o debate do evento estimulando a participação pública.
+Eventos Interativos é um projeto baseado na aplicação Audiências Interativas da Câmara dos deputados, desenvolvido de forma serverless utilizando NextJS para aplicação em conjunto com o Firebase. Permite a interação de pessoas durante uma transmissão ao vivo por meio de um chat e de uma sessão de perguntas que podem ser utilizadas pelos administradores para fomentar o debate do evento estimulando a participação pública.
 
 
 ## 🧪 Tecnologias
@@ -34,12 +34,13 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [x] Pesquisa de eventos agendados;
 
 ### Funcionalidades que serão implementadas
-- [ ] Lista de palavras proibidas em chats em perguntas com moderação automática do sistema;
+- [ ] Lista de palavras proibidas na seção de chate de perguntas com moderação automática do sistema;
 - [ ] Painel de Administração do sistema para usuários administradores;
 - [ ] Página de estatísticas para os usuários administradores;
 - [ ] Moderação do Chat por parte dos administradores;
 - [ ] Painel de administração da sala de um evento para administradores;
 - [ ] Página de perfil do usuário, permitindo o gerenciamento de suas contribuições;
+- [ ] Versão mobile da aplicação;
 
 
 ## Como executar
