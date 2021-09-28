@@ -2,9 +2,22 @@
 import React, { FormEvent, useState } from 'react';
 import Head from 'next/head';
 import type { NextPage } from 'next';
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+  Select,
+  Box, Grid, Textarea,
+} from '@chakra-ui/react';
+
 import { Header } from '../../components/Header';
 import { useAuth } from '../../hooks/useAuth';
 import { database } from '../../services/firebase';
+import {
+  H1, Container, FormDiv, DateInput,
+} from '../../styles/pages/cadastrarPageStyle';
 
 const CreateEvent: NextPage = () => {
   const { user } = useAuth();
@@ -57,17 +70,50 @@ const CreateEvent: NextPage = () => {
       <Header />
 
       <main>
-        <div>
-          <label htmlFor="name">Título</label>
-          <input id="titulo" type="text" required onChange={handleEventTitleChange} />
-          <label htmlFor="youtubeVideo">Video do Youtube</label>
-          <input id="youtubeVideo" type="text" required onChange={handleEventVideoChange} />
-          <label htmlFor="eventType">Tipo do Evento</label>
-          <input id="eventType" type="text" required onChange={handleEventTypeChange} value={eventType} />
-          <button type="button" onClick={handleCreateNewEvent}>
-            Cadastrar
-          </button>
-        </div>
+        <Container>
+          <H1>Cadastrar Evento</H1>
+          <FormDiv>
+
+            <FormControl id="title" mt={2}>
+              <FormLabel>Título do Evento</FormLabel>
+              <Input type="text" />
+            </FormControl>
+
+            <FormControl id="videoId" mt={5}>
+              <FormLabel>Descrição</FormLabel>
+              <Textarea />
+            </FormControl>
+
+            <FormControl id="videoId" mt={5}>
+              <FormLabel>Id do vídeo do youtube</FormLabel>
+              <Input type="text" />
+            </FormControl>
+
+            <FormControl id="eventType" mt={5} width="100%">
+              <FormLabel>Tipo do evento</FormLabel>
+              <Select placeholder="Escolha uma opção">
+                <option value="option1">Audiência Pública</option>
+                <option value="option2">Reunião Técnica</option>
+                <option value="option3">Congresso</option>
+              </Select>
+            </FormControl>
+
+            <FormControl id="videoId" mt={5}>
+              <FormLabel>Dia do evento</FormLabel>
+              <DateInput type="date" data-date-format="DD MMMM YYYY" />
+            </FormControl>
+
+            <label htmlFor="name">Título</label>
+            <input id="titulo" type="text" required onChange={handleEventTitleChange} />
+            <label htmlFor="youtubeVideo">Video do Youtube</label>
+            <input id="youtubeVideo" type="text" required onChange={handleEventVideoChange} />
+            <label htmlFor="eventType">Tipo do Evento</label>
+            <input id="eventType" type="text" required onChange={handleEventTypeChange} value={eventType} />
+            <button type="button" onClick={handleCreateNewEvent}>
+              Cadastrar
+            </button>
+          </FormDiv>
+        </Container>
       </main>
     </div>
   );
