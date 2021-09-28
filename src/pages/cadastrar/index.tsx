@@ -1,61 +1,88 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FormEvent, useState } from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+
 import Head from 'next/head';
 import type { NextPage } from 'next';
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
-  Select,
-  Box, Grid, Textarea,
+  FormControl, FormLabel, Input, Select,
+  Textarea, NumberInput, NumberDecrementStepper, NumberIncrementStepper,
+  NumberInputField, NumberInputStepper, Button,
 } from '@chakra-ui/react';
 
 import { Header } from '../../components/Header';
 import { useAuth } from '../../hooks/useAuth';
 import { database } from '../../services/firebase';
 import {
-  H1, Container, FormDiv, DateInput,
+  H1, Container, FormDiv, DateAndHourFormContainer, ScheduleEventTimeFormControl,
+  ButtonContainer,
 } from '../../styles/pages/cadastrarPageStyle';
 
 const CreateEvent: NextPage = () => {
   const { user } = useAuth();
   const [eventTitle, setEventTitle] = useState('');
+  const [eventDescription, setEventDescription] = useState('');
   const [eventVideo, setEventVideo] = useState('');
   const [eventType, setEventType] = useState('');
 
-  async function handleCreateNewEvent(event: FormEvent) {
+  const [eventDay, setEventDay] = useState(1);
+  const [eventMonth, setEventMonth] = useState(1);
+  const [eventYear, setEventYear] = useState(1);
+  const [eventHour, setEventHour] = useState(0);
+  const [eventMinutes, setEventMinutes] = useState(0);
+
+  async function resetFields() {
+    setEventTitle('');
+    setEventDescription('');
+    setEventVideo('');
+    setEventType('');
+    setEventDay(0);
+    setEventMonth(0);
+    setEventYear(0);
+    setEventHour(0);
+    setEventMinutes(0);
+  }
+
+  async function handleCreateNewEvent(event: any) {
     event.preventDefault();
 
     const roomRef = database.ref('events/');
 
     const newPushRef = await roomRef.push();
     const eventId = newPushRef.key;
-
+    const date = await new Date(eventYear, eventMonth, eventDay, eventHour, eventMinutes).getTime();
     const roomInfo = {
       title: eventTitle,
+      description: eventDescription,
       authorID: user?.id,
       youtubeLiveVideoId: eventVideo,
-      scheduleDate: Date.now(),
-      type: 'Audiência Pública',
-      description: 'Uma descrição qualquer do evento e suas informações',
+      scheduleDate: date,
+      type: eventType,
       status: 'Agendado',
       closedOn: null,
     };
 
-    await database.ref(`events/${eventId}/info`).push(roomInfo);
+    try {
+      await database.ref(`events/${eventId}/info`).push(roomInfo);
+      await toast.success('Evento cadastrado com sucesso!', { position: 'top-right' });
+      await resetFields();
+    } catch (e) {
+      toast.error('Erro ao cadastrar o evento. Tente novamente!');
+    }
   }
 
   const handleEventTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEventTitle(e.currentTarget.value);
   };
 
+  const handleEventDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setEventDescription(e.currentTarget.value);
+  };
   const handleEventVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEventVideo(e.currentTarget.value);
   };
 
-  const handleEventTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEventTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setEventType(e.currentTarget.value);
   };
 
@@ -68,50 +95,103 @@ const CreateEvent: NextPage = () => {
       </Head>
 
       <Header />
-
       <main>
         <Container>
           <H1>Cadastrar Evento</H1>
           <FormDiv>
 
-            <FormControl id="title" mt={2}>
+            <FormControl id="titleForm" mt={2}>
               <FormLabel>Título do Evento</FormLabel>
-              <Input type="text" />
+              <Input type="text" onChange={handleEventTitleChange} value={eventTitle} />
             </FormControl>
 
-            <FormControl id="videoId" mt={5}>
+            <FormControl id="descriptionForm" mt={5}>
               <FormLabel>Descrição</FormLabel>
-              <Textarea />
+              <Textarea onChange={handleEventDescriptionChange} value={eventDescription} />
             </FormControl>
 
-            <FormControl id="videoId" mt={5}>
+            <FormControl id="videoForm" mt={5}>
               <FormLabel>Id do vídeo do youtube</FormLabel>
-              <Input type="text" />
+              <Input type="text" onChange={(e) => handleEventVideoChange(e)} value={eventVideo} />
             </FormControl>
 
-            <FormControl id="eventType" mt={5} width="100%">
+            <FormControl id="typeForm" mt={5} width="100%">
               <FormLabel>Tipo do evento</FormLabel>
-              <Select placeholder="Escolha uma opção">
-                <option value="option1">Audiência Pública</option>
-                <option value="option2">Reunião Técnica</option>
-                <option value="option3">Congresso</option>
+              <Select placeholder="Escolha uma opção" onChange={handleEventTypeChange} value={eventType}>
+                <option value="Audiência Pública">Audiência Pública</option>
+                <option value="Reunião Técnica">Reunião Técnica</option>
+                <option value="Congresso">Congresso</option>
               </Select>
             </FormControl>
 
-            <FormControl id="videoId" mt={5}>
-              <FormLabel>Dia do evento</FormLabel>
-              <DateInput type="date" data-date-format="DD MMMM YYYY" />
-            </FormControl>
+            <ScheduleEventTimeFormControl id="timestampForm">
+              <DateAndHourFormContainer>
+                <FormControl id="day" width="20%">
+                  <FormLabel>Dia</FormLabel>
+                  <NumberInput
+                    max={31}
+                    min={1}
+                    onChange={(valStr, valNum) => setEventDay(valNum)}
+                    value={eventDay}
+                  >
+                    <NumberInputField />
+                  </NumberInput>
+                </FormControl>
+                <FormControl id="month" width="20%">
+                  <FormLabel>Mês</FormLabel>
+                  <NumberInput
+                    max={12}
+                    min={1}
+                    onChange={(valStr, valNum) => setEventMonth(valNum)}
+                    value={eventMonth}
+                  >
+                    <NumberInputField />
+                  </NumberInput>
+                </FormControl>
+                <FormControl id="year" width="30%">
+                  <FormLabel>Ano</FormLabel>
+                  <NumberInput
+                    min={2021}
+                    onChange={(valStr, valNum) => setEventYear(valNum)}
+                    value={eventYear}
+                  >
+                    <NumberInputField />
+                  </NumberInput>
+                </FormControl>
+              </DateAndHourFormContainer>
+              <DateAndHourFormContainer>
+                <FormControl id="hour" width="30%">
+                  <FormLabel>Hora</FormLabel>
+                  <NumberInput
+                    max={24}
+                    min={1}
+                    onChange={(valStr, valNum) => setEventHour(valNum)}
+                    value={eventHour}
+                  >
+                    <NumberInputField />
+                  </NumberInput>
+                </FormControl>
+                <FormControl id="minutes" width="30%">
+                  <FormLabel>Minutos</FormLabel>
+                  <NumberInput
+                    max={60}
+                    min={0}
+                    onChange={(valStr, valNum) => setEventMinutes(valNum)}
+                    value={eventMinutes}
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                </FormControl>
+              </DateAndHourFormContainer>
+            </ScheduleEventTimeFormControl>
 
-            <label htmlFor="name">Título</label>
-            <input id="titulo" type="text" required onChange={handleEventTitleChange} />
-            <label htmlFor="youtubeVideo">Video do Youtube</label>
-            <input id="youtubeVideo" type="text" required onChange={handleEventVideoChange} />
-            <label htmlFor="eventType">Tipo do Evento</label>
-            <input id="eventType" type="text" required onChange={handleEventTypeChange} value={eventType} />
-            <button type="button" onClick={handleCreateNewEvent}>
-              Cadastrar
-            </button>
+            <ButtonContainer>
+              <Button onClick={(e) => handleCreateNewEvent(e)}>Cadastrar Evento</Button>
+            </ButtonContainer>
           </FormDiv>
         </Container>
       </main>

@@ -13,7 +13,7 @@ export const Container = styled.div`
     margin: 0 auto;
 `;
 
-export const FormDiv = styled.div`
+export const FormDiv = styled.form`
     width: 100%;
     height: 100%;
     display: flex;
@@ -22,7 +22,23 @@ export const FormDiv = styled.div`
     padding: 1rem;
 `;
 
-export const DateInput = styled.input`
+export const DateAndHourFormContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+`;
+
+export const ScheduleEventTimeFormControl = styled.div`
     width: 100%;
-    outline: 1px solid #E2E8F0;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+`;
+
+export const ButtonContainer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
 `;
