@@ -91,3 +91,63 @@ Lembrando que você precisa ter uma conta no [Figma](http://figma.com/).
 ## 📝 License
 
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+
+
+# English
+
+## 💻 Project
+
+Eventos Interactivos is a project based on the Interactive Hearings application of the Chamber of Deputies, developed in a serverless way using NextJS for application in conjunction with Firebase. Allows the interaction of people during a live broadcast through a chat and a question session that can be used by administrators to encourage debate at the event, stimulating public participation.
+
+
+## 🧪 Technologies
+
+This project was developed with the following technologies:
+
+- [NextJS](https://nextjs.org)
+- [Firebase](https://firebase.google.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Styled Components](https://styled-components.com/)
+
+## Implemented features
+
+- [x] Creation of rooms for events;
+- [x] Authentication using Google social login;
+- [x] Creation of rooms for events;
+- [x] Chat for users in real time;
+- [x] Real-time question area;
+- [x] Real-time votes on the questions asked;
+- [x] Home page with live events, scheduled and closed events;
+- [x] Search for scheduled events;
+
+### Features that will be implemented
+- [ ] List of prohibited words in the chat section of questions with automatic moderation of the system;
+- [ ] System Administration Panel for administrator users;
+- [ ] Statistics page for admin users;
+- [ ] Chat moderation by administrators;
+- [ ] Event room administration panel for administrators;
+- [ ] User profile page, allowing you to manage your contributions;
+- [ ] Mobile version of the application;
+
+
+## How to run
+
+Clone the project and access its folder.
+
+```bash
+$ https://github.com/joaopaulonsoares/eventos-interativos
+$cd events-interactive
+```
+
+To start it, follow the steps below:
+```bash
+# Install dependencies
+$npm install
+
+# To start in development mode:
+$npm run dev
+```
+
+The app will be available in your browser at the address http://localhost:3000.
+
+Remembering that you will need to create an account on [Firebase](https://firebase.google.com/) and a project to make a Realtime Database available.
