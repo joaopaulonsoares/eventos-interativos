@@ -151,3 +151,29 @@ $npm run dev
 The app will be available in your browser at the address http://localhost:3000.
 
 Remembering that you will need to create an account on [Firebase](https://firebase.google.com/) and a project to make a Realtime Database available.
+### Additional settings required
+
+To run the project you need to connect to a RealTime Database instance from firebase. In order for the application to connect to your instance, create a ".env.local" file containing the following information that can be found on your RealTime Database settings page:
+
+bash
+NEXT_PUBLIC_API_KEY=
+NEXT_PUBLIC_AUTH_DOMAIN=
+NEXT_PUBLIC_DATABASE_URL=
+NEXT_PUBLIC_PROJECT_ID=
+NEXT_PUBLIC_STORAGE_BUCKET=
+NEXT_PUBLIC_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_APP_ID=
+NEXT_PUBLIC_MEASUREMENT_ID=
+
+
+## 🔖 Layout
+
+You can view the project layout through the link below:
+
+- [Web Layout](https://www.figma.com/file/ieohQ8CMFkJ1lp3dq2G0aS/Projeto-Pessoal-Novo-Audiências?node-id=0%3A1)
+
+Remembering that you need to have an account on [Figma](http://figma.com/).
+
+## 📝 License
+
+This project is under the MIT license. See the [LICENSE](LICENSE.md) file for more details.
